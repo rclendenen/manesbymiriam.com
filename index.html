@@ -292,29 +292,32 @@
       </aside>
     </div>
 
-    <!-- Contact form moved below -->
-    <section class="card" id="contact">
-      <h3 style="margin-top:0">Contact</h3>
-      <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
+    <!-- Contact form moved below community section -->
+    <div class="two">
+      <div></div> <!-- Empty left column -->
+      <aside class="card" id="contact">
+        <h3 style="margin-top:0">Contact</h3>
+        <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
 
-      <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
-      <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
-        <label style="display:block;margin:8px 0;font-weight:600">Email</label>
-        <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
+        <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
+        <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
+          <label style="display:block;margin:8px 0;font-weight:600">Email</label>
+          <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
 
-        <label style="display:block;margin:8px 0;font-weight:600">Message</label>
-        <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
+          <label style="display:block;margin:8px 0;font-weight:600">Message</label>
+          <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
 
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn btn-primary" type="submit">Send</button>
-          <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn btn-primary" type="submit">Send</button>
+            <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
+          </div>
+        </form>
+
+        <div style="margin-top:18px;font-size:13px;color:var(--muted)">
+          <strong>Location:</strong> 445 W Kennedale Pkwy KENNEDALE, TX 76060 • <a href="https://www.google.com/maps/place/445+W+Kennedale+Pkwy,+Kennedale,+TX+76060/@32.6524771,-97.2307403,17z/data=!3m1!4b1!4m6!3m5!1s0x864e65040d76c081:0x620a54dfebdc1f21!8m2!3d32.6524771!4d-97.2281654!16s%2Fg%2F11b8v5mzch?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Get directions</a>
         </div>
-      </form>
-
-      <div style="margin-top:18px;font-size:13px;color:var(--muted)">
-        <strong>Location:</strong> 445 W Kennedale Pkwy KENNEDALE, TX 76060 • <a href="https://www.google.com/maps/place/445+W+Kennedale+Pkwy,+Kennedale,+TX+76060/@32.6524771,-97.2307403,17z/data=!3m1!4b1!4m6!3m5!1s0x864e65040d76c081:0x620a54dfebdc1f21!8m2!3d32.6524771!4d-97.2281654!16s%2Fg%2F11b8v5mzch?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Get directions</a>
-      </div>
-    </section>
+      </aside>
+    </div>
 
     <!-- Newsletter Subscription -->
     <section class="card" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center">
