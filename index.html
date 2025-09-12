@@ -188,10 +188,10 @@
         </div>
       </section>
 
-      <!-- Subscribe & Contact form -->
+      <!-- Contact form -->
       <aside class="card" id="contact">
-        <h3 style="margin-top:0">Contact & Subscribe</h3>
-        <p class="sub">Questions or bridal inquiries? Send a note — or join the email list for exclusive specials.</p>
+        <h3 style="margin-top:0">Contact</h3>
+        <p class="sub">Questions or bridal inquiries? Send a note and I'll get back to you within 48 hours.</p>
 
         <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
         <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
@@ -212,6 +212,23 @@
         </div>
       </aside>
     </div>
+
+    <!-- Newsletter Subscription -->
+    <section class="card" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center">
+      <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
+      <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
+      
+      <form id="newsletterForm" action="{{NEWSLETTER_ENDPOINT}}" method="post" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input name="email" type="email" placeholder="Enter your email" required 
+                 style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
+          <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
+        </div>
+        <small style="display:block;margin-top:8px;color:var(--muted);font-size:12px">
+          We respect your privacy. Unsubscribe at any time.
+        </small>
+      </form>
+    </section>
 
     <!-- Reviews -->
     <section id="reviews" class="card">
@@ -256,6 +273,13 @@
       e.preventDefault();
       // Simple UX: show a thank-you and reset. Replace with fetch if you have an API endpoint.
       alert('Thanks — your message has been sent. I will reply within 48 hours.');
+      e.target.reset();
+    }
+
+    function handleNewsletterSubmit(e){
+      e.preventDefault();
+      // Simple UX: show a thank-you and reset. Replace with fetch if you have an API endpoint.
+      alert('Thank you for subscribing! You\'ll receive our monthly newsletter with exclusive tips and specials.');
       e.target.reset();
     }
   </script>
