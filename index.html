@@ -51,7 +51,7 @@
 
     /* Sections */
     section{margin:36px 0}
-    .two{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+    .two{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;align-content:start}
     .pricing-grid{display:flex;gap:12px;flex-wrap:wrap}
     .price-card{flex:1 1 180px;background:linear-gradient(180deg,var(--cream),white);border-radius:12px;padding:18px}
 
@@ -103,6 +103,11 @@
     /* Smooth scrolling */
     html{
       scroll-behavior:smooth;
+    }
+    
+    /* Ensure perfect alignment */
+    .two > * {
+      align-self: start;
     }
     
     /* Responsive */
