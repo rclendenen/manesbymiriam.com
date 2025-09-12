@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Placeholder Images</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        canvas { border: 1px solid #ccc; margin: 10px; }
+        .instructions { background: #f0f8ff; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Create Placeholder Images for Testing</h1>
+    
+    <div class="instructions">
+        <h2>Instructions:</h2>
+        <p>This page will create small placeholder images that we can use to test if the gallery system works. Once we confirm the gallery works, we can replace these with your actual photos.</p>
+        <p>Click the buttons below to create and download placeholder images.</p>
+    </div>
+    
+    <div>
+        <button onclick="createPlaceholder('miriam_headshot.jpg', 'Miriam Headshot', 400, 400)">Create Headshot Placeholder</button>
+        <button onclick="createPlaceholder('client_photo_1.jpg', 'Client Photo 1', 800, 600)">Create Gallery Photo 1</button>
+        <button onclick="createPlaceholder('client_photo_2.jpg', 'Client Photo 2', 800, 600)">Create Gallery Photo 2</button>
+        <button onclick="createPlaceholder('client_photo_4.jpg', 'Client Photo 4', 800, 600)">Create Gallery Photo 4</button>
+        <button onclick="createPlaceholder('client_photo_7.jpg', 'Client Photo 7', 800, 600)">Create Gallery Photo 7</button>
+        <button onclick="createPlaceholder('client_photo_8.jpg', 'Client Photo 8', 800, 600)">Create Gallery Photo 8</button>
+        <button onclick="createPlaceholder('client_photo_9.jpg', 'Client Photo 9', 800, 600)">Create Gallery Photo 9</button>
+    </div>
+    
+    <div id="canvas-container"></div>
+    
+    <script>
+        function createPlaceholder(filename, text, width, height) {
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#f7dfe0');
+            gradient.addColorStop(1, '#fff4ef');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Add text
+            ctx.fillStyle = '#2e2a28';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, width/2, height/2);
+            
+            // Add border
+            ctx.strokeStyle = '#e7bfc1';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(2, 2, width-4, height-4);
+            
+            // Convert to blob and download
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                URL.revokeObjectURL(url);
+            }, 'image/jpeg', 0.8);
+            
+            // Add to page for preview
+            const container = document.getElementById('canvas-container');
+            const div = document.createElement('div');
+            div.style.display = 'inline-block';
+            div.style.margin = '10px';
+            div.innerHTML = `<p>${filename}</p>`;
+            div.appendChild(canvas);
+            container.appendChild(div);
+        }
+    </script>
+</body>
+</html>
