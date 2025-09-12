@@ -154,6 +154,32 @@
       align-self: start;
     }
     
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
+      /* Stack layout vertically on mobile */
+      .main-layout {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      
+      /* Ensure proper spacing on mobile */
+      .right-column {
+        gap: 20px !important;
+      }
+      
+      /* Adjust pricing grid for mobile */
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+      }
+      
+      /* Make price cards smaller on mobile */
+      .price-card {
+        padding: 12px !important;
+        font-size: 14px !important;
+      }
+    }
+    
     /* Responsive */
     @media (max-width:920px){ 
       .hero,.two{grid-template-columns:1fr} 
@@ -265,8 +291,9 @@
       </div>
     </section>
 
-    <div class="two">
-      <!-- Pricing -->
+    <!-- Main Layout: Pricing on left, Contact + Giving Back stacked on right -->
+    <div class="main-layout" style="display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start">
+      <!-- Pricing Section (Left Column) -->
       <section id="pricing" class="card parallax-depth-4">
         <h3 style="margin-top:0">Pricing</h3>
         <p class="sub">Professional hair services with transparent pricing. All prices subject to hair length and complexity.</p>
@@ -347,77 +374,76 @@
         </div>
       </section>
 
-      <!-- Contact form on the right -->
-      <aside class="card parallax-depth-5">
-        <h3 style="margin-top:0">Contact</h3>
-        <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
+      <!-- Right Column: Contact + Giving Back stacked -->
+      <div class="right-column" style="display:flex;flex-direction:column;gap:24px">
+        <!-- Contact form -->
+        <aside class="card parallax-depth-5">
+          <h3 style="margin-top:0">Contact</h3>
+          <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
 
-        <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
-        <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
-          <label style="display:block;margin:8px 0;font-weight:600">Email</label>
-          <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
+          <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
+          <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
+            <label style="display:block;margin:8px 0;font-weight:600">Email</label>
+            <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
 
-          <label style="display:block;margin:8px 0;font-weight:600">Message</label>
-          <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
+            <label style="display:block;margin:8px 0;font-weight:600">Message</label>
+            <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
 
-          <div style="margin-top:12px;display:flex;gap:8px">
-            <button class="btn btn-primary" type="submit">Send</button>
-            <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
-          </div>
-        </form>
-
-        <div style="margin-top:18px;font-size:13px;color:var(--muted)">
-          <strong>Location:</strong> 445 W Kennedale Pkwy KENNEDALE, TX 76060 • <a href="https://www.google.com/maps/place/445+W+Kennedale+Pkwy,+Kennedale,+TX+76060/@32.6524771,-97.2307403,17z/data=!3m1!4b1!4m6!3m5!1s0x864e65040d76c081:0x620a54dfebdc1f21!8m2!3d32.6524771!4d-97.2281654!16s%2Fg%2F11b8v5mzch?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Get directions</a>
-        </div>
-      </aside>
-    </div>
-
-    <!-- Second Row: Empty space + Giving Back overlapping row 1 -->
-    <div class="two" style="margin-top:-200px">
-      <div></div> <!-- Empty left column -->
-      <!-- Community Giving -->
-      <aside class="card parallax-depth-4">
-        <h3 style="margin-top:0">Giving Back</h3>
-        <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive, and through my company, I provide free haircuts for the homeless. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
-        
-        <div style="margin-top:20px">
-          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
-            <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <span style="font-size:18px">🎒</span>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn btn-primary" type="submit">Send</button>
+              <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
             </div>
-            <div>
-              <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Back to School Specials</h4>
-              <p style="margin:0;color:var(--muted);font-size:14px">Special pricing for students returning to school</p>
+          </form>
+
+          <div style="margin-top:18px;font-size:13px;color:var(--muted)">
+            <strong>Location:</strong> 445 W Kennedale Pkwy KENNEDALE, TX 76060 • <a href="https://www.google.com/maps/place/445+W+Kennedale+Pkwy,+Kennedale,+TX+76060/@32.6524771,-97.2307403,17z/data=!3m1!4b1!4m6!3m5!1s0x864e65040d76c081:0x620a54dfebdc1f21!8m2!3d32.6524771!4d-97.2281654!16s%2Fg%2F11b8v5mzch?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Get directions</a>
+          </div>
+        </aside>
+
+        <!-- Community Giving -->
+        <aside class="card parallax-depth-4">
+          <h3 style="margin-top:0">Giving Back</h3>
+          <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive, and through my company, I provide free haircuts for the homeless. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
+          
+          <div style="margin-top:20px">
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+              <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <span style="font-size:18px">🎒</span>
+              </div>
+              <div>
+                <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Back to School Specials</h4>
+                <p style="margin:0;color:var(--muted);font-size:14px">Special pricing for students returning to school</p>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+              <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <span style="font-size:18px">🎄</span>
+              </div>
+              <div>
+                <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Annual Haircut Drive</h4>
+                <p style="margin:0;color:var(--muted);font-size:14px">Yearly community event providing free haircuts</p>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+              <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <span style="font-size:18px">🙏</span>
+              </div>
+              <div>
+                <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Haircuts for the Homeless</h4>
+                <p style="margin:0;color:var(--muted);font-size:14px">Providing dignity and care through <a href="https://haircutsforhope.org/" target="_blank" style="color:var(--dusty-rose);text-decoration:none;font-weight:600">Haircuts for Hope by Skoolie Foundation</a></p>
+              </div>
             </div>
           </div>
           
-          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
-            <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <span style="font-size:18px">🎄</span>
-            </div>
-            <div>
-              <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Annual Haircut Drive</h4>
-              <p style="margin:0;color:var(--muted);font-size:14px">Yearly community event providing free haircuts</p>
-            </div>
+          <div style="margin-top:20px;padding:16px;background:linear-gradient(135deg,var(--soft-pink),var(--cream));border-radius:12px;text-align:center">
+            <p style="margin:0;color:var(--text);font-weight:600;font-size:14px">
+              Using my skills to bring dignity, confidence, and care to those who need it most.
+            </p>
           </div>
-          
-          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
-            <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <span style="font-size:18px">🙏</span>
-            </div>
-            <div>
-              <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Haircuts for the Homeless</h4>
-              <p style="margin:0;color:var(--muted);font-size:14px">Providing dignity and care through <a href="https://haircutsforhope.org/" target="_blank" style="color:var(--dusty-rose);text-decoration:none;font-weight:600">Haircuts for Hope by Skoolie Foundation</a></p>
-            </div>
-          </div>
-        </div>
-        
-        <div style="margin-top:20px;padding:16px;background:linear-gradient(135deg,var(--soft-pink),var(--cream));border-radius:12px;text-align:center">
-          <p style="margin:0;color:var(--text);font-weight:600;font-size:14px">
-            Using my skills to bring dignity, confidence, and care to those who need it most.
-          </p>
-        </div>
-      </aside>
+        </aside>
+      </div>
     </div>
 
     <!-- Newsletter Subscription -->
