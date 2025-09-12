@@ -324,9 +324,9 @@
       <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
       <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
       
-      <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse" method="post" target="_blank" style="max-width:400px;margin:0 auto">
+      <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input name="entry.YOUR_ENTRY_ID_HERE" type="email" placeholder="Enter your email" required 
+          <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
                  style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
           <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
         </div>
@@ -406,25 +406,14 @@
       submitButton.textContent = 'Subscribing...';
       submitButton.disabled = true;
       
-      // Replace this URL with your Google Apps Script web app URL after setup
-      const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+      // Submit to Google Form
+      const formData = new FormData();
+      formData.append('entry.1234567890', email); // This will need to be updated with the correct entry ID
       
-      // For now, use a simple alert. After setting up Google Apps Script, uncomment the fetch code below
-      alert('Thank you for subscribing! You\'ll receive our monthly newsletter with exclusive tips and specials.');
-      e.target.reset();
-      submitButton.textContent = 'Subscribe';
-      submitButton.disabled = false;
-      
-      /* 
-      // Uncomment this code after setting up Google Apps Script:
-      
-      fetch(GOOGLE_SCRIPT_URL, {
+      fetch('https://docs.google.com/forms/d/e/1FAIpQLSf38s0lTMeHeVDqwcbeMemPqQbQ9P14gX_SwMCDpW9WdMoXyg/formResponse', {
         method: 'POST',
         mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({email: email})
+        body: formData
       })
       .then(() => {
         alert('Thank you for subscribing! You\'ll receive our monthly newsletter with exclusive tips and specials.');
@@ -439,7 +428,6 @@
         submitButton.textContent = 'Subscribe';
         submitButton.disabled = false;
       });
-      */
     }
   </script>
 </body>
