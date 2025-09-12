@@ -73,21 +73,23 @@
     /* Enhanced Parallax Effects with Multiple Layers */
     .parallax-bg{
       position:fixed;
-      top:0;
+      top:-20%;
       left:0;
       width:100%;
-      height:150%;
+      height:140%;
       background:linear-gradient(135deg,var(--soft-pink),var(--cream),var(--dusty-rose));
+      background-size:200% 200%;
+      animation:gradientAnimation 15s ease infinite;
       z-index:-3;
       transform:translateZ(0);
     }
     
     .parallax-layer-1{
       position:fixed;
-      top:0;
+      top:-20%;
       left:0;
       width:100%;
-      height:120%;
+      height:140%;
       background:radial-gradient(circle at 20% 80%, rgba(231,191,193,0.3) 0%, transparent 50%),
                   radial-gradient(circle at 80% 20%, rgba(255,244,239,0.4) 0%, transparent 50%);
       z-index:-2;
@@ -96,13 +98,19 @@
     
     .parallax-layer-2{
       position:fixed;
-      top:0;
+      top:-20%;
       left:0;
       width:100%;
-      height:100%;
+      height:140%;
       background:linear-gradient(45deg, transparent 0%, rgba(247,223,224,0.2) 25%, transparent 50%, rgba(255,244,239,0.3) 75%, transparent 100%);
       z-index:-1;
       transform:translateZ(0);
+    }
+    
+    @keyframes gradientAnimation{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
     
     /* Parallax Elements with Different Depths */
@@ -538,17 +546,17 @@
       function updateParallax() {
         const scrolled = window.pageYOffset;
         
-        // Background layers with different speeds
+        // Background layers with different speeds - ensure they cover full viewport
         if (parallaxBg) {
-          parallaxBg.style.transform = `translateY(${scrolled * -0.8}px)`;
+          parallaxBg.style.transform = `translateY(${scrolled * 0.2}px)`;
         }
         
         if (parallaxLayer1) {
-          parallaxLayer1.style.transform = `translateY(${scrolled * -0.6}px)`;
+          parallaxLayer1.style.transform = `translateY(${scrolled * 0.4}px)`;
         }
         
         if (parallaxLayer2) {
-          parallaxLayer2.style.transform = `translateY(${scrolled * -0.4}px)`;
+          parallaxLayer2.style.transform = `translateY(${scrolled * 0.6}px)`;
         }
         
         // Depth 1: Fastest movement (closest to viewer)
@@ -605,14 +613,18 @@
       // Add subtle rotation to background layers for more dynamic effect
       function addRotationEffect() {
         const scrolled = window.pageYOffset;
-        const rotation = scrolled * 0.01;
+        const rotation = scrolled * 0.005; // Reduced rotation for smoother effect
         
         if (parallaxLayer1) {
-          parallaxLayer1.style.transform += ` rotate(${rotation}deg)`;
+          const currentTransform = parallaxLayer1.style.transform;
+          const baseTransform = currentTransform.replace(/rotate\([^)]*\)/g, '');
+          parallaxLayer1.style.transform = baseTransform + ` rotate(${rotation}deg)`;
         }
         
         if (parallaxLayer2) {
-          parallaxLayer2.style.transform += ` rotate(${-rotation * 0.5}deg)`;
+          const currentTransform = parallaxLayer2.style.transform;
+          const baseTransform = currentTransform.replace(/rotate\([^)]*\)/g, '');
+          parallaxLayer2.style.transform = baseTransform + ` rotate(${-rotation * 0.5}deg)`;
         }
       }
       
