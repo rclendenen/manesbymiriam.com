@@ -247,30 +247,74 @@
         </div>
       </section>
 
-      <!-- Contact form -->
-      <aside class="card" id="contact">
-        <h3 style="margin-top:0">Contact</h3>
-        <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
-
-        <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
-        <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
-          <label style="display:block;margin:8px 0;font-weight:600">Email</label>
-          <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
-
-          <label style="display:block;margin:8px 0;font-weight:600">Message</label>
-          <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
-
-          <div style="margin-top:12px;display:flex;gap:8px">
-            <button class="btn btn-primary" type="submit">Send</button>
-            <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
+      <!-- Community Giving -->
+      <aside class="card" id="community">
+        <h3 style="margin-top:0">Giving Back</h3>
+        <p class="sub">Community is at the heart of everything I do. Here's how I'm making a difference:</p>
+        
+        <div style="margin-top:20px">
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+            <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <span style="font-size:18px">🎄</span>
+            </div>
+            <div>
+              <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Holiday Haircuts</h4>
+              <p style="margin:0;color:var(--muted);font-size:14px">Free haircuts for families during the holidays</p>
+            </div>
           </div>
-        </form>
-
-        <div style="margin-top:18px;font-size:13px;color:var(--muted)">
-          <strong>Location:</strong> {{CITY_NEIGHBORHOOD}} • <a href="{{MAPS_LINK}}">Get directions</a>
+          
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+            <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <span style="font-size:18px">👶</span>
+            </div>
+            <div>
+              <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Foster Care Outreach</h4>
+              <p style="margin:0;color:var(--muted);font-size:14px">Expanding services for children in foster care</p>
+            </div>
+          </div>
+          
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+            <div style="width:40px;height:40px;background:var(--soft-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <span style="font-size:18px">🏠</span>
+            </div>
+            <div>
+              <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Community Salon Vision</h4>
+              <p style="margin:0;color:var(--muted);font-size:14px">Building a space where beauty meets purpose</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top:20px;padding:16px;background:linear-gradient(135deg,var(--soft-pink),var(--cream));border-radius:12px;text-align:center">
+          <p style="margin:0;color:var(--text);font-weight:600;font-size:14px">
+            Every child deserves to feel special, valued, and confident.
+          </p>
         </div>
       </aside>
     </div>
+
+    <!-- Contact form moved below -->
+    <section class="card" id="contact">
+      <h3 style="margin-top:0">Contact</h3>
+      <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
+
+      <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
+      <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
+        <label style="display:block;margin:8px 0;font-weight:600">Email</label>
+        <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
+
+        <label style="display:block;margin:8px 0;font-weight:600">Message</label>
+        <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
+
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn btn-primary" type="submit">Send</button>
+          <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
+        </div>
+      </form>
+
+      <div style="margin-top:18px;font-size:13px;color:var(--muted)">
+        <strong>Location:</strong> {{CITY_NEIGHBORHOOD}} • <a href="{{MAPS_LINK}}">Get directions</a>
+      </div>
+    </section>
 
     <!-- Newsletter Subscription -->
     <section class="card" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center">
