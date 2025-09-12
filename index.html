@@ -324,6 +324,19 @@
       <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
       <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
       
+      <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse" method="post" target="_blank" style="max-width:400px;margin:0 auto">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input name="entry.YOUR_ENTRY_ID_HERE" type="email" placeholder="Enter your email" required 
+                 style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
+          <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
+        </div>
+        <small style="display:block;margin-top:8px;color:var(--muted);font-size:12px">
+          We respect your privacy. Unsubscribe at any time.
+        </small>
+      </form>
+      
+      <!-- Alternative: Simple email collection (uncomment to use) -->
+      <!--
       <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
@@ -334,6 +347,7 @@
           We respect your privacy. Unsubscribe at any time.
         </small>
       </form>
+      -->
     </section>
 
     <!-- Reviews -->
