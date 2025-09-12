@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Manes by Miriam — Book your appointment</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M6 4 C6 2, 8 2, 8 4 L8 12 C8 14, 6 14, 6 12 Z' fill='%23E7BFC1'/><path d='M26 4 C26 2, 28 2, 28 4 L28 12 C28 14, 26 14, 26 12 Z' fill='%23E7BFC1'/><path d='M8 8 L16 16 L14 18 L6 10 Z' fill='%23E7BFC1'/><path d='M24 8 L16 16 L18 18 L26 10 Z' fill='%23E7BFC1'/><circle cx='16' cy='16' r='1.5' fill='%23B88A8D'/></svg>">
 
   <!-- Soft palette: blush, warm nude, cream -->
   <style>
@@ -68,36 +70,70 @@
     .social-link:hover{background:var(--soft-pink);color:var(--text)}
     .social-icon{width:18px;height:18px;fill:currentColor}
 
-    /* Parallax Effects */
+    /* Enhanced Parallax Effects with Multiple Layers */
     .parallax-bg{
       position:fixed;
       top:0;
       left:0;
       width:100%;
-      height:120%;
+      height:150%;
       background:linear-gradient(135deg,var(--soft-pink),var(--cream),var(--dusty-rose));
+      z-index:-3;
+      transform:translateZ(0);
+    }
+    
+    .parallax-layer-1{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:120%;
+      background:radial-gradient(circle at 20% 80%, rgba(231,191,193,0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255,244,239,0.4) 0%, transparent 50%);
+      z-index:-2;
+      transform:translateZ(0);
+    }
+    
+    .parallax-layer-2{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:linear-gradient(45deg, transparent 0%, rgba(247,223,224,0.2) 25%, transparent 50%, rgba(255,244,239,0.3) 75%, transparent 100%);
       z-index:-1;
       transform:translateZ(0);
     }
     
+    /* Parallax Elements with Different Depths */
     .parallax-element{
       transform:translateZ(0);
       will-change:transform;
     }
     
-    .hero .lead{
-      transform:translateY(0);
-      transition:transform 0.1s ease-out;
+    .parallax-depth-1{
+      transform:translateZ(0);
+      will-change:transform;
     }
     
-    .gallery img{
-      transform:translateY(0);
-      transition:transform 0.1s ease-out;
+    .parallax-depth-2{
+      transform:translateZ(0);
+      will-change:transform;
     }
     
-    .card{
-      transform:translateY(0);
-      transition:transform 0.1s ease-out;
+    .parallax-depth-3{
+      transform:translateZ(0);
+      will-change:transform;
+    }
+    
+    .parallax-depth-4{
+      transform:translateZ(0);
+      will-change:transform;
+    }
+    
+    .parallax-depth-5{
+      transform:translateZ(0);
+      will-change:transform;
     }
     
     /* Smooth scrolling */
@@ -121,8 +157,10 @@
   </style>
 </head>
 <body>
-  <!-- Parallax Background -->
+  <!-- Enhanced Parallax Background Layers -->
   <div class="parallax-bg"></div>
+  <div class="parallax-layer-1"></div>
+  <div class="parallax-layer-2"></div>
   
   <div class="container">
     <header>
@@ -146,7 +184,7 @@
 
     <!-- HERO -->
     <main class="hero">
-      <section class="lead card parallax-element">
+      <section class="lead card parallax-depth-1">
         <h1>Soft, modern hair with a personal touch</h1>
         <p class="sub">Specializing in lived-in color, soft blonding, and hair extensions. Serving [City].</p>
 
@@ -163,7 +201,7 @@
       </section>
 
       <!-- quick booking card -->
-      <aside class="card parallax-element" id="book">
+      <aside class="card parallax-depth-2" id="book">
         <h3 style="margin-top:0">Book an appointment</h3>
         <p class="sub">Secure your spot online — quick confirmation.</p>
         <!-- Replace with your booking URL (Square, Fresha, Acuity, Calendly, Vagaro, etc.) -->
@@ -176,7 +214,7 @@
     </main>
 
     <!-- About + Social -->
-    <section id="about" class="card parallax-element">
+    <section id="about" class="card parallax-depth-3">
       <div style="display:flex;gap:18px;align-items:center">
         <img src="https://imgur.com/OIgziSh.jpg" alt="Miriam headshot" style="width:212px;height:212px;border-radius:12px;object-fit:cover;box-shadow:0 6px 20px rgba(46,42,40,0.06);">
         <div>
@@ -207,7 +245,7 @@
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" class="card parallax-element">
+    <section id="gallery" class="card parallax-depth-2">
       <h3 style="margin-top:0">Gallery</h3>
       <div class="gallery" aria-label="Portfolio gallery">
         <img src="https://imgur.com/EPQoECV.jpg" alt="Client work - Hair styling and color" style="width:100%;height:220px;object-fit:cover;border-radius:12px;box-shadow:0 6px 20px rgba(46,42,40,0.06);">
@@ -221,7 +259,7 @@
 
     <div class="two">
       <!-- Pricing -->
-      <section id="pricing" class="card parallax-element">
+      <section id="pricing" class="card parallax-depth-4">
         <h3 style="margin-top:0">Pricing</h3>
         <p class="sub">Professional hair services with transparent pricing. All prices subject to hair length and complexity.</p>
         
@@ -302,7 +340,7 @@
       </section>
 
       <!-- Community Giving -->
-      <aside class="card parallax-element" id="community">
+      <aside class="card parallax-depth-4">
         <h3 style="margin-top:0">Giving Back</h3>
         <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive, and through my company, I provide free haircuts for the homeless. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
         
@@ -349,7 +387,7 @@
     <!-- Contact form positioned with custom spacing -->
     <div style="display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:start;margin-top:35px">
       <div></div> <!-- Empty left column -->
-      <aside class="card parallax-element" id="contact">
+      <aside class="card parallax-depth-5">
         <h3 style="margin-top:0">Contact</h3>
         <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
 
@@ -374,7 +412,7 @@
     </div>
 
     <!-- Newsletter Subscription -->
-    <section class="card parallax-element" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center">
+    <section class="card parallax-depth-1" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center">
       <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
       <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
       
@@ -405,7 +443,7 @@
     </section>
 
     <!-- Reviews -->
-    <section id="reviews" class="card parallax-element">
+    <section id="reviews" class="card parallax-depth-3">
       <h3 style="margin-top:0">What clients say</h3>
       <div class="reviews">
         <div class="review"><strong>Emily R.</strong> — "Miriam is the best. My color stayed soft and natural and everyone asks where I go!"</div>
@@ -413,7 +451,7 @@
       </div>
     </section>
 
-    <footer class="card parallax-element">
+    <footer class="card parallax-depth-5">
       <div>&copy; <span id="year"></span> Manes by Miriam — All rights reserved</div>
       <div class="social-links">
         <a href="https://www.instagram.com/Manesbymiriam/?fbclid=IwY2xjawMwiAtleHRuA2FlbQIxMABicmlkETE5RVF2bjlybmZOVm5qcjZLAR6g9MxJ7r_88JczDtL5wWxiJ7ZjlN_GxHzg-rlr5jSxpv4yOMf96aNWuyZXWQ_aem_9TJJKZpnO6F5dVKiRs2IYQ#" class="social-link" aria-label="Instagram">
@@ -484,29 +522,67 @@
       });
     }
     
-    // Parallax scrolling effect
+    // Enhanced Parallax with Multiple Depth Layers
     function initParallax() {
-      const parallaxElements = document.querySelectorAll('.parallax-element');
       const parallaxBg = document.querySelector('.parallax-bg');
+      const parallaxLayer1 = document.querySelector('.parallax-layer-1');
+      const parallaxLayer2 = document.querySelector('.parallax-layer-2');
+      
+      // Get all depth elements
+      const depth1Elements = document.querySelectorAll('.parallax-depth-1');
+      const depth2Elements = document.querySelectorAll('.parallax-depth-2');
+      const depth3Elements = document.querySelectorAll('.parallax-depth-3');
+      const depth4Elements = document.querySelectorAll('.parallax-depth-4');
+      const depth5Elements = document.querySelectorAll('.parallax-depth-5');
       
       function updateParallax() {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
         
-        // Background parallax
+        // Background layers with different speeds
         if (parallaxBg) {
-          parallaxBg.style.transform = `translateY(${rate}px)`;
+          parallaxBg.style.transform = `translateY(${scrolled * -0.8}px)`;
         }
         
-        // Element parallax with different speeds
-        parallaxElements.forEach((element, index) => {
-          const speed = 0.1 + (index * 0.02); // Varying speeds for depth
-          const yPos = -(scrolled * speed);
+        if (parallaxLayer1) {
+          parallaxLayer1.style.transform = `translateY(${scrolled * -0.6}px)`;
+        }
+        
+        if (parallaxLayer2) {
+          parallaxLayer2.style.transform = `translateY(${scrolled * -0.4}px)`;
+        }
+        
+        // Depth 1: Fastest movement (closest to viewer)
+        depth1Elements.forEach(element => {
+          const yPos = -(scrolled * 0.3);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Depth 2: Medium-fast movement
+        depth2Elements.forEach(element => {
+          const yPos = -(scrolled * 0.2);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Depth 3: Medium movement
+        depth3Elements.forEach(element => {
+          const yPos = -(scrolled * 0.15);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Depth 4: Slow movement
+        depth4Elements.forEach(element => {
+          const yPos = -(scrolled * 0.1);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Depth 5: Slowest movement (furthest from viewer)
+        depth5Elements.forEach(element => {
+          const yPos = -(scrolled * 0.05);
           element.style.transform = `translateY(${yPos}px)`;
         });
       }
       
-      // Throttle scroll events for better performance
+      // Enhanced performance with intersection observer
       let ticking = false;
       function requestTick() {
         if (!ticking) {
@@ -520,10 +596,40 @@
         requestTick();
       }
       
+      // Use passive listeners for better performance
       window.addEventListener('scroll', handleScroll, { passive: true });
       
       // Initial call
       updateParallax();
+      
+      // Add subtle rotation to background layers for more dynamic effect
+      function addRotationEffect() {
+        const scrolled = window.pageYOffset;
+        const rotation = scrolled * 0.01;
+        
+        if (parallaxLayer1) {
+          parallaxLayer1.style.transform += ` rotate(${rotation}deg)`;
+        }
+        
+        if (parallaxLayer2) {
+          parallaxLayer2.style.transform += ` rotate(${-rotation * 0.5}deg)`;
+        }
+      }
+      
+      // Combine rotation with parallax
+      function updateParallaxWithRotation() {
+        updateParallax();
+        addRotationEffect();
+      }
+      
+      // Update scroll handler to include rotation
+      function handleScrollWithRotation() {
+        ticking = false;
+        requestAnimationFrame(updateParallaxWithRotation);
+      }
+      
+      window.removeEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScrollWithRotation, { passive: true });
     }
     
     // Initialize parallax when page loads
