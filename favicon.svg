@@ -1,28 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <defs>
     <linearGradient id="scissorsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#E7BFC1;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#F7DFE0;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#D4A5A8;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#2a2a2a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bladeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#404040;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
     </linearGradient>
   </defs>
   
-  <!-- Scissors handle 1 -->
-  <path d="M6 4 C6 2, 8 2, 8 4 L8 12 C8 14, 6 14, 6 12 Z" fill="url(#scissorsGradient)" stroke="#C49A9D" stroke-width="0.5"/>
+  <!-- Left blade -->
+  <path d="M8 6 L16 16 L14 18 L6 8 Z" fill="url(#bladeGradient)" stroke="#000" stroke-width="0.5"/>
   
-  <!-- Scissors handle 2 -->
-  <path d="M26 4 C26 2, 28 2, 28 4 L28 12 C28 14, 26 14, 26 12 Z" fill="url(#scissorsGradient)" stroke="#C49A9D" stroke-width="0.5"/>
+  <!-- Right blade -->
+  <path d="M24 6 L16 16 L18 18 L26 8 Z" fill="url(#bladeGradient)" stroke="#000" stroke-width="0.5"/>
   
-  <!-- Scissors blade 1 -->
-  <path d="M8 8 L16 16 L14 18 L6 10 Z" fill="url(#scissorsGradient)" stroke="#C49A9D" stroke-width="0.5"/>
+  <!-- Left handle -->
+  <ellipse cx="6" cy="20" rx="3" ry="6" fill="url(#scissorsGradient)" stroke="#000" stroke-width="0.5"/>
+  <circle cx="6" cy="20" r="1.5" fill="#333"/>
   
-  <!-- Scissors blade 2 -->
-  <path d="M24 8 L16 16 L18 18 L26 10 Z" fill="url(#scissorsGradient)" stroke="#C49A9D" stroke-width="0.5"/>
+  <!-- Right handle -->
+  <ellipse cx="26" cy="20" rx="3" ry="6" fill="url(#scissorsGradient)" stroke="#000" stroke-width="0.5"/>
+  <circle cx="26" cy="20" r="1.5" fill="#333"/>
   
-  <!-- Pivot point -->
-  <circle cx="16" cy="16" r="1.5" fill="#B88A8D" stroke="#A67B7E" stroke-width="0.3"/>
-  
-  <!-- Handle holes -->
-  <circle cx="7" cy="6" r="1" fill="#A67B7E"/>
-  <circle cx="25" cy="6" r="1" fill="#A67B7E"/>
+  <!-- Pivot screw -->
+  <circle cx="16" cy="16" r="2" fill="#666" stroke="#000" stroke-width="0.3"/>
+  <circle cx="16" cy="16" r="1" fill="#999"/>
 </svg>

@@ -27,7 +27,7 @@
 
     html,body{height:100%;margin:0;background:var(--bg);color:var(--text);}
     .container{max-width:var(--max-width);margin:0 auto;padding:36px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:18px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;border-bottom:1px solid rgba(46,42,40,0.1);}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--soft-pink),var(--cream));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text);
@@ -207,8 +207,9 @@
         <div class="logo">M</div>
         <div>
           <div style="font-weight:700">Manes by Miriam</div>
-          <div style="font-size:12px;color:var(--muted)">Cuts • Color • Hair Extensions</div>
+          <div style="font-size:12px;color:var(--muted)">Extension Expert • Full Service Stylist</div>
         </div>
+        <img src="m_ps_6.jpg" alt="Miriam professional headshot" style="width:48px;height:48px;border-radius:8px;object-fit:cover;margin-left:12px;box-shadow:0 2px 8px rgba(46,42,40,0.1);">
       </div>
 
       <nav aria-label="Primary">
@@ -224,8 +225,8 @@
     <!-- HERO -->
     <main class="hero">
       <section class="lead card parallax-depth-1">
-        <h1>Soft, modern hair with a personal touch</h1>
-        <p class="sub">Specializing in lived-in color, soft blonding, and hair extensions. Serving [City].</p>
+        <h1>Where beauty meets confidence — your pamper day starts here.</h1>
+        <p class="sub">Specializing in seamless extensions, dimensional color, and soft blonding — serving Kennedale, TX.</p>
 
         <p><a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Book Now</a>
            <a class="btn btn-outline" href="#contact">Inquiries</a></p>
@@ -455,20 +456,22 @@
     </div>
 
     <!-- Newsletter Subscription -->
-    <section class="card parallax-depth-1" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center;margin-top:36px">
+    <section class="card parallax-depth-1" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center;margin-top:60px;margin-bottom:40px">
       <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
       <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
       
-      <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
+      <form id="newsletterForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf38s0lTMeHeVDqwcbeMemPqQbQ9P14gX_SwMCDpW9WdMoXyg/formResponse" method="post" target="hidden_iframe" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
+          <input id="newsletterEmail" name="entry.1234567890" type="email" placeholder="Enter your email" required 
                  style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
           <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
         </div>
         <small style="display:block;margin-top:8px;color:var(--muted);font-size:12px">
           We respect your privacy. Unsubscribe at any time.
         </small>
+        <div id="newsletterMessage" style="margin-top:12px;font-size:14px;display:none;"></div>
       </form>
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
       
       <!-- Alternative: Simple email collection (uncomment to use) -->
       <!--
