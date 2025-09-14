@@ -460,9 +460,9 @@
       <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
       <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
       
-      <form id="newsletterForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf38s0lTMeHeVDqwcbeMemPqQbQ9P14gX_SwMCDpW9WdMoXyg/formResponse" method="post" target="hidden_iframe" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
+      <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input id="newsletterEmail" name="entry.1234567890" type="email" placeholder="Enter your email" required 
+          <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
                  style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
           <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
         </div>
@@ -471,7 +471,6 @@
         </small>
         <div id="newsletterMessage" style="margin-top:12px;font-size:14px;display:none;"></div>
       </form>
-      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
       
       <!-- Alternative: Simple email collection (uncomment to use) -->
       <!--
@@ -562,33 +561,50 @@
       
       const email = document.getElementById('newsletterEmail').value;
       const submitButton = e.target.querySelector('button[type="submit"]');
+      const messageDiv = document.getElementById('newsletterMessage');
       
       // Show loading state
       submitButton.textContent = 'Subscribing...';
       submitButton.disabled = true;
+      messageDiv.style.display = 'none';
       
-      // Submit to Google Form
+      // Submit to Google Apps Script
       const formData = new FormData();
-      formData.append('entry.1234567890', email); // This will need to be updated with the correct entry ID
+      formData.append('email', email);
       
-      fetch('https://docs.google.com/forms/d/e/1FAIpQLSf38s0lTMeHeVDqwcbeMemPqQbQ9P14gX_SwMCDpW9WdMoXyg/formResponse', {
+      // Replace this URL with your actual Google Apps Script Web App URL
+      const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+      
+      fetch(scriptUrl, {
         method: 'POST',
-        mode: 'no-cors',
         body: formData
       })
-      .then(() => {
-        alert('Thank you for subscribing! You\'ll receive our monthly newsletter with exclusive tips and specials.');
-        e.target.reset();
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showNewsletterMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
+          document.getElementById('newsletterEmail').value = '';
+        } else {
+          showNewsletterMessage(data.message || 'Something went wrong. Please try again.', 'error');
+        }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Error:', error);
-        alert('Thank you for subscribing! You\'ll receive our monthly newsletter with exclusive tips and specials.');
-        e.target.reset();
+        showNewsletterMessage('Something went wrong. Please try again.', 'error');
       })
       .finally(() => {
+        // Reset button
         submitButton.textContent = 'Subscribe';
         submitButton.disabled = false;
       });
+    }
+    
+    function showNewsletterMessage(message, type) {
+      const messageDiv = document.getElementById('newsletterMessage');
+      messageDiv.textContent = message;
+      messageDiv.style.display = 'block';
+      messageDiv.style.color = type === 'success' ? '#4CAF50' : '#f44336';
+      messageDiv.style.fontWeight = '500';
     }
     
     // Enhanced Parallax with Multiple Depth Layers
