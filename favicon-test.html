@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Test - Manes by Miriam</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
+    <meta name="msapplication-TileImage" content="favicon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff8f7;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #d4af8c;
+            border-radius: 5px;
+            background: white;
+        }
+        .favicon-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .favicon-display img {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Favicon Test Page</h1>
+    <p>This page tests if your favicon is working correctly.</p>
+    
+    <div class="test-section">
+        <h3>Favicon Display Test</h3>
+        <div class="favicon-display">
+            <img src="favicon.png" alt="Favicon" onerror="this.style.display='none'; document.getElementById('favicon-status').innerHTML='❌ Favicon image not found'; document.getElementById('favicon-status').className='status error';">
+            <span id="favicon-status" class="status success">✅ Favicon image loaded successfully</span>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Browser Cache Instructions</h3>
+        <p><strong>If you don't see the favicon in your browser tab:</strong></p>
+        <ul>
+            <li><strong>Chrome/Edge:</strong> Press Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)</li>
+            <li><strong>Firefox:</strong> Press Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)</li>
+            <li><strong>Safari:</strong> Press Cmd+Option+R (Mac)</li>
+            <li><strong>Alternative:</strong> Clear browser cache in settings</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h3>Favicon File Check</h3>
+        <p><strong>File path:</strong> <code>favicon.png</code></p>
+        <p><strong>Direct link:</strong> <a href="favicon.png" target="_blank">Open favicon.png directly</a></p>
+        <p><strong>Expected:</strong> White scissors on reddish-brown circular background</p>
+    </div>
+    
+    <div class="test-section">
+        <h3>HTML Favicon Links</h3>
+        <p>Your HTML includes these favicon links:</p>
+        <ul>
+            <li><code>&lt;link rel="icon" type="image/png" sizes="32x32" href="favicon.png"&gt;</code></li>
+            <li><code>&lt;link rel="icon" type="image/png" sizes="16x16" href="favicon.png"&gt;</code></li>
+            <li><code>&lt;link rel="apple-touch-icon" href="favicon.png"&gt;</code></li>
+            <li><code>&lt;link rel="shortcut icon" href="favicon.png"&gt;</code></li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h3>Troubleshooting Steps</h3>
+        <ol>
+            <li><strong>Check the image above</strong> - Does it show your scissors icon?</li>
+            <li><strong>Click the direct link</strong> - Does it open your favicon image?</li>
+            <li><strong>Clear browser cache</strong> - Use the keyboard shortcuts above</li>
+            <li><strong>Try a different browser</strong> - Test in Chrome, Firefox, Safari</li>
+            <li><strong>Check browser tab</strong> - Look for the icon next to the page title</li>
+        </ol>
+    </div>
+    
+    <script>
+        // Test if favicon loads
+        window.addEventListener('load', function() {
+            const img = new Image();
+            img.onload = function() {
+                console.log('Favicon loaded successfully');
+            };
+            img.onerror = function() {
+                console.error('Favicon failed to load');
+                document.getElementById('favicon-status').innerHTML = '❌ Favicon failed to load';
+                document.getElementById('favicon-status').className = 'status error';
+            };
+            img.src = 'favicon.png';
+        });
+    </script>
+</body>
+</html>
