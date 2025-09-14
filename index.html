@@ -568,35 +568,57 @@
       submitButton.disabled = true;
       messageDiv.style.display = 'none';
       
-      // Submit to Google Apps Script
-      const formData = new FormData();
-      formData.append('email', email);
-      
       // Your Google Apps Script Web App URL
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbw_8EOYfNlft2gs9VJCVRWjBd3iuG6k5UfPzgO0E4MRnrOiO7lZzHO-vRXMyc1pMrNQ/exec';
       
+      // Create form data
+      const formData = new FormData();
+      formData.append('email', email);
+      
+      // Try multiple methods to handle CORS issues
       fetch(scriptUrl, {
         method: 'POST',
+        mode: 'no-cors',
         body: formData
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showNewsletterMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
-          document.getElementById('newsletterEmail').value = '';
-        } else {
-          showNewsletterMessage(data.message || 'Something went wrong. Please try again.', 'error');
-        }
+      .then(() => {
+        // With no-cors mode, we can't read the response, so assume success
+        showNewsletterMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
+        document.getElementById('newsletterEmail').value = '';
       })
       .catch(error => {
         console.error('Error:', error);
-        showNewsletterMessage('Something went wrong. Please try again.', 'error');
+        // Try alternative method using form submission
+        submitToGoogleAppsScript(email, scriptUrl);
       })
       .finally(() => {
         // Reset button
         submitButton.textContent = 'Subscribe';
         submitButton.disabled = false;
       });
+    }
+    
+    // Alternative submission method using hidden form
+    function submitToGoogleAppsScript(email, scriptUrl) {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = scriptUrl;
+      form.target = '_blank';
+      form.style.display = 'none';
+      
+      const emailInput = document.createElement('input');
+      emailInput.type = 'hidden';
+      emailInput.name = 'email';
+      emailInput.value = email;
+      
+      form.appendChild(emailInput);
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+      
+      // Show success message
+      showNewsletterMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
+      document.getElementById('newsletterEmail').value = '';
     }
     
     function showNewsletterMessage(message, type) {

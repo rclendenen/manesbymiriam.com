@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #d4af8c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #c19a6b;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .debug {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Newsletter Subscription Test</h1>
+    <p>This page tests the newsletter subscription functionality.</p>
+    
+    <form id="testForm">
+        <div class="form-group">
+            <label for="testEmail">Email Address:</label>
+            <input type="email" id="testEmail" name="email" required placeholder="Enter your email">
+        </div>
+        <button type="submit" id="submitBtn">Test Subscribe</button>
+    </form>
+    
+    <div id="message" class="message"></div>
+    
+    <div class="debug">
+        <h3>Debug Information:</h3>
+        <p><strong>Script URL:</strong> <span id="scriptUrl"></span></p>
+        <p><strong>Status:</strong> <span id="status">Ready to test</span></p>
+        <p><strong>Last Response:</strong> <span id="lastResponse">None</span></p>
+    </div>
+
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbw_8EOYfNlft2gs9VJCVRWjBd3iuG6k5UfPzgO0E4MRnrOiO7lZzHO-vRXMyc1pMrNQ/exec';
+        
+        document.getElementById('scriptUrl').textContent = scriptUrl;
+        
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('testEmail').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+            const statusDiv = document.getElementById('status');
+            const responseDiv = document.getElementById('lastResponse');
+            
+            // Show loading state
+            submitBtn.textContent = 'Testing...';
+            submitBtn.disabled = true;
+            messageDiv.style.display = 'none';
+            statusDiv.textContent = 'Submitting...';
+            
+            // Test 1: Direct fetch with CORS
+            console.log('Testing direct fetch...');
+            fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(email)}`
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                return response.text();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                responseDiv.textContent = data;
+                
+                try {
+                    const jsonData = JSON.parse(data);
+                    if (jsonData.success) {
+                        showMessage('Success! Check your Google Sheet.', 'success');
+                        statusDiv.textContent = 'Success';
+                    } else {
+                        showMessage('Error: ' + jsonData.message, 'error');
+                        statusDiv.textContent = 'Error';
+                    }
+                } catch (e) {
+                    showMessage('Response received but not JSON: ' + data, 'error');
+                    statusDiv.textContent = 'Non-JSON Response';
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                responseDiv.textContent = 'Error: ' + error.message;
+                statusDiv.textContent = 'Fetch Failed';
+                
+                // Test 2: Form submission method
+                console.log('Trying form submission method...');
+                testFormSubmission(email);
+            })
+            .finally(() => {
+                submitBtn.textContent = 'Test Subscribe';
+                submitBtn.disabled = false;
+            });
+        });
+        
+        function testFormSubmission(email) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = scriptUrl;
+            form.target = '_blank';
+            form.style.display = 'none';
+            
+            const emailInput = document.createElement('input');
+            emailInput.type = 'hidden';
+            emailInput.name = 'email';
+            emailInput.value = email;
+            
+            form.appendChild(emailInput);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            
+            showMessage('Form submitted in new tab. Check your Google Sheet.', 'success');
+            document.getElementById('status').textContent = 'Form Submitted';
+        }
+        
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+        
+        // Test the script URL on page load
+        window.addEventListener('load', function() {
+            console.log('Testing script URL accessibility...');
+            fetch(scriptUrl, { method: 'GET' })
+            .then(response => response.text())
+            .then(data => {
+                console.log('GET response:', data);
+                document.getElementById('lastResponse').textContent = 'GET: ' + data;
+            })
+            .catch(error => {
+                console.error('GET test failed:', error);
+                document.getElementById('lastResponse').textContent = 'GET failed: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
