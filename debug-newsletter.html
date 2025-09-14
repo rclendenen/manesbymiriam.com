@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Newsletter Debug Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; }
+        .success { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .warning { background: #fff3cd; border-color: #ffeaa7; color: #856404; }
+        button { background: #d4af8c; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #c19a6b; }
+        input { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 3px; }
+        .log { background: #f8f9fa; border: 1px solid #dee2e6; padding: 10px; margin: 10px 0; border-radius: 3px; font-family: monospace; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Newsletter Debug Tool</h1>
+    <p>This tool will help us identify exactly why your newsletter isn't working.</p>
+    
+    <div class="debug-section">
+        <h3>Step 1: Test Google Apps Script Access</h3>
+        <button onclick="testScriptAccess()">Test Script Access</button>
+        <div id="scriptResult" class="log"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Step 2: Test Form Submission</h3>
+        <input type="email" id="testEmail" placeholder="Enter test email" value="test@example.com">
+        <button onclick="testFormSubmission()">Test Form Submission</button>
+        <div id="formResult" class="log"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Step 3: Test Direct POST Request</h3>
+        <button onclick="testDirectPost()">Test Direct POST</button>
+        <div id="postResult" class="log"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Step 4: Check Google Sheet Connection</h3>
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Open your <a href="https://docs.google.com/spreadsheets/d/1_FvoF5FUU4cojB4oYywgTShX2t2cKYBIS3cqr94Gsdg/edit?gid=0#gid=0" target="_blank">Google Sheet</a></li>
+            <li>Make sure Row 1 has these headers: <strong>Email | Date Added | Status</strong></li>
+            <li>If headers are missing, add them now</li>
+            <li>Click the button below after adding headers</li>
+        </ol>
+        <button onclick="checkSheetHeaders()">I've Added the Headers</button>
+        <div id="sheetResult" class="log"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Step 5: Manual Test</h3>
+        <p>Try submitting a test email manually:</p>
+        <input type="email" id="manualEmail" placeholder="Enter email for manual test" value="manual-test@example.com">
+        <button onclick="manualTest()">Submit Manual Test</button>
+        <div id="manualResult" class="log"></div>
+    </div>
+
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbyfYzHOW08w_XrpjW5S0P74euw7YnxR_vqirzAtH_xqRrMoSsT3yvBb0PzeEigvJWZ8/exec';
+        
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : '';
+            element.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+        }
+        
+        function testScriptAccess() {
+            const resultDiv = document.getElementById('scriptResult');
+            resultDiv.innerHTML = '';
+            log('scriptResult', 'Testing script access...');
+            
+            fetch(scriptUrl, { method: 'GET' })
+            .then(response => {
+                log('scriptResult', `Response status: ${response.status}`, response.ok ? 'success' : 'error');
+                return response.text();
+            })
+            .then(data => {
+                log('scriptResult', `Response data: ${data}`, 'success');
+                if (data.includes('Newsletter API is running')) {
+                    log('scriptResult', '✅ Script is accessible and running!', 'success');
+                } else {
+                    log('scriptResult', '⚠️ Script responded but with unexpected data', 'warning');
+                }
+            })
+            .catch(error => {
+                log('scriptResult', `❌ Error accessing script: ${error.message}`, 'error');
+            });
+        }
+        
+        function testFormSubmission() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('formResult');
+            resultDiv.innerHTML = '';
+            log('formResult', `Testing form submission with email: ${email}`);
+            
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = scriptUrl;
+            form.target = '_blank';
+            form.style.display = 'none';
+            
+            const emailInput = document.createElement('input');
+            emailInput.type = 'hidden';
+            emailInput.name = 'email';
+            emailInput.value = email;
+            
+            form.appendChild(emailInput);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            
+            log('formResult', 'Form submitted in new tab. Check your Google Sheet!', 'success');
+            log('formResult', 'If no data appears in the sheet, the issue is with the script or sheet connection.', 'warning');
+        }
+        
+        function testDirectPost() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('postResult');
+            resultDiv.innerHTML = '';
+            log('postResult', `Testing direct POST request with email: ${email}`);
+            
+            const formData = new FormData();
+            formData.append('email', email);
+            
+            fetch(scriptUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                log('postResult', `POST Response status: ${response.status}`, response.ok ? 'success' : 'error');
+                return response.text();
+            })
+            .then(data => {
+                log('postResult', `POST Response data: ${data}`, 'success');
+                try {
+                    const jsonData = JSON.parse(data);
+                    if (jsonData.success) {
+                        log('postResult', '✅ POST request successful!', 'success');
+                    } else {
+                        log('postResult', `❌ POST request failed: ${jsonData.message}`, 'error');
+                    }
+                } catch (e) {
+                    log('postResult', `⚠️ Response is not JSON: ${data}`, 'warning');
+                }
+            })
+            .catch(error => {
+                log('postResult', `❌ POST request failed: ${error.message}`, 'error');
+                log('postResult', 'This is likely a CORS issue. The form submission method should still work.', 'warning');
+            });
+        }
+        
+        function checkSheetHeaders() {
+            const resultDiv = document.getElementById('sheetResult');
+            resultDiv.innerHTML = '';
+            log('sheetResult', 'Headers check completed. Now test the form submission above.', 'success');
+        }
+        
+        function manualTest() {
+            const email = document.getElementById('manualEmail').value;
+            const resultDiv = document.getElementById('manualResult');
+            resultDiv.innerHTML = '';
+            log('manualResult', `Manual test with email: ${email}`);
+            
+            // Try the same method as your website
+            const formData = new FormData();
+            formData.append('email', email);
+            
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            })
+            .then(() => {
+                log('manualResult', 'Request sent (no-cors mode). Check your Google Sheet in 30 seconds.', 'success');
+                log('manualResult', 'If no data appears, the issue is with the Google Apps Script or Sheet connection.', 'warning');
+            })
+            .catch(error => {
+                log('manualResult', `Error: ${error.message}`, 'error');
+            });
+        }
+        
+        // Auto-run script access test on page load
+        window.addEventListener('load', testScriptAccess);
+    </script>
+</body>
+</html>
