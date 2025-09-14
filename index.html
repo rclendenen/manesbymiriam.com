@@ -4,24 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Manes by Miriam — Book your appointment</title>
-  <!-- Favicon for modern browsers with new filename -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-new.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-new.png">
-  
-  <!-- Legacy favicon support -->
-  <link rel="shortcut icon" href="favicon-new.png">
-  <link rel="icon" href="favicon-new.png" type="image/png">
-  
-  <!-- Apple devices -->
-  <link rel="apple-touch-icon" href="favicon-new.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon-new.png">
-  
-  <!-- Windows tiles -->
-  <meta name="msapplication-TileImage" content="favicon-new.png">
+  <!-- Data URI Favicon - Embedded directly in HTML -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNkNGJmOGMiLz4KPHBhdGggZD0iTTggMTBMMTIgNkwxNiAxMEwyMCA2TDI0IDEwTDIwIDE0TDI0IDE4TDIwIDIyTDE2IDE4TDEyIDIyTDggMThMMTIgMTRMOCAxMFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIiIGZpbGw9IiNkNGJmOGMiLz4KPC9zdmc+">
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNkNGJmOGMiLz4KPHBhdGggZD0iTTggMTBMMTIgNkwxNiAxMEwyMCA2TDI0IDEwTDIwIDE0TDI0IDE4TDIwIDIyTDE2IDE4TDEyIDIyTDggMThMMTIgMTRMOCAxMFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIiIGZpbGw9IiNkNGJmOGMiLz4KPC9zdmc+">
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNkNGJmOGMiLz4KPHBhdGggZD0iTTggMTBMMTIgNkwxNiAxMEwyMCA2TDI0IDEwTDIwIDE0TDI0IDE4TDIwIDIyTDE2IDE4TDEyIDIyTDggMThMMTIgMTRMOCAxMFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIiIGZpbGw9IiNkNGJmOGMiLz4KPC9zdmc+">
+  <link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNkNGJmOGMiLz4KPHBhdGggZD0iTTggMTBMMTIgNkwxNiAxMEwyMCA2TDI0IDEwTDIwIDE0TDI0IDE4TDIwIDIyTDE2IDE4TDEyIDIyTDggMThMMTIgMTRMOCAxMFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIiIGZpbGw9IiNkNGJmOGMiLz4KPC9zdmc+">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNkNGJmOGMiLz4KPHBhdGggZD0iTTggMTBMMTIgNkwxNiAxMEwyMCA2TDI0IDEwTDIwIDE0TDI0IDE4TDIwIDIyTDE2IDE4TDEyIDIyTDggMThMMTIgMTRMOCAxMFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIiIGZpbGw9IiNkNGJmOGMiLz4KPC9zdmc+">
+  <meta name="msapplication-TileImage" content="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNkNGJmOGMiLz4KPHBhdGggZD0iTTggMTBMMTIgNkwxNiAxMEwyMCA2TDI0IDEwTDIwIDE0TDI0IDE4TDIwIDIyTDE2IDE4TDEyIDIyTDggMThMMTIgMTRMOCAxMFoiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIiIGZpbGw9IiNkNGJmOGMiLz4KPC9zdmc+">
   <meta name="msapplication-TileColor" content="#d4af8c">
-  
-  <!-- Fallback for older browsers -->
-  <link rel="icon" href="favicon-new.png" type="image/x-icon">
 
   <!-- Soft palette: blush, warm nude, cream -->
   <style>
