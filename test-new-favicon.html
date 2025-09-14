@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test New Favicon - Manes by Miriam</title>
+    
+    <!-- Test favicon with cache busting -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png?v=2">
+    <link rel="shortcut icon" href="favicon.png?v=2">
+    <link rel="apple-touch-icon" href="favicon.png?v=2">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff8f7;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #d4af8c;
+            border-radius: 5px;
+            background: white;
+        }
+        .favicon-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .favicon-display img {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .instructions {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test New Favicon</h1>
+    <p>This page tests your new favicon.png with cache busting.</p>
+    
+    <div class="test-section">
+        <h3>1. Check Browser Tab</h3>
+        <p><strong>Look at this page's tab in your browser.</strong> You should see your scissors icon.</p>
+        <div class="instructions">
+            <p><strong>Expected:</strong> White scissors on reddish-brown circular background</p>
+            <p><strong>If you see the old favicon:</strong> The browser is still using cached version</p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Direct Image Test</h3>
+        <div class="favicon-display">
+            <img src="favicon.png?v=2" alt="New Favicon" onload="document.getElementById('image-status').innerHTML='✅ New favicon loads successfully'; document.getElementById('image-status').className='status success';" onerror="document.getElementById('image-status').innerHTML='❌ New favicon failed to load'; document.getElementById('image-status').className='status error';">
+            <span id="image-status" class="status warning">Testing new favicon...</span>
+        </div>
+        <p><strong>Direct link:</strong> <a href="favicon.png?v=2" target="_blank">Open favicon.png?v=2</a></p>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Force Cache Clear</h3>
+        <div class="instructions">
+            <p><strong>If you still see the old favicon, try these steps:</strong></p>
+            <ol>
+                <li><strong>Chrome/Edge:</strong> Press <kbd>Ctrl+Shift+R</kbd> (Windows) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
+                <li><strong>Firefox:</strong> Press <kbd>Ctrl+F5</kbd> (Windows) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
+                <li><strong>Alternative:</strong> Press <kbd>F12</kbd> → Network tab → check "Disable cache" → refresh</li>
+                <li><strong>Last resort:</strong> Clear all browser data in settings</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. Test Different Browsers</h3>
+        <p>Try opening this page in different browsers to see if the favicon appears:</p>
+        <ul>
+            <li>Chrome</li>
+            <li>Firefox</li>
+            <li>Edge</li>
+            <li>Safari (if on Mac)</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h3>5. What to Look For</h3>
+        <div class="instructions">
+            <p><strong>Your new favicon should show:</strong></p>
+            <ul>
+                <li>White scissors icon</li>
+                <li>Reddish-brown circular background</li>
+                <li>Clean, professional appearance</li>
+            </ul>
+            <p><strong>If you see:</strong></p>
+            <ul>
+                <li>Old/default browser icon → Cache issue</li>
+                <li>No icon at all → File not found</li>
+                <li>Different icon → Wrong file being used</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Test if new favicon loads
+        window.addEventListener('load', function() {
+            const img = new Image();
+            img.onload = function() {
+                console.log('New favicon loaded successfully');
+            };
+            img.onerror = function() {
+                console.error('New favicon failed to load');
+                document.getElementById('image-status').innerHTML = '❌ New favicon failed to load';
+                document.getElementById('image-status').className = 'status error';
+            };
+            img.src = 'favicon.png?v=2';
+        });
+    </script>
+</body>
+</html>
