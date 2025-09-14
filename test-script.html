@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Apps Script Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #d4af8c; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #c19a6b; }
+        .result { margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 3px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Google Apps Script Test</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: GET Request (Should work)</h3>
+        <button onclick="testGet()">Test GET</button>
+        <div id="getResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 2: POST Request (This is what we need to fix)</h3>
+        <input type="email" id="testEmail" placeholder="Enter test email" style="padding: 8px; margin-right: 10px;">
+        <button onclick="testPost()">Test POST</button>
+        <div id="postResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 3: Form Submission (Alternative method)</h3>
+        <button onclick="testFormSubmission()">Test Form Submission</button>
+        <div id="formResult" class="result"></div>
+    </div>
+
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbw_8EOYfNlft2gs9VJCVRWjBd3iuG6k5UfPzgO0E4MRnrOiO7lZzHO-vRXMyc1pMrNQ/exec';
+        
+        function testGet() {
+            const resultDiv = document.getElementById('getResult');
+            resultDiv.textContent = 'Testing GET request...';
+            
+            fetch(scriptUrl, { method: 'GET' })
+            .then(response => response.text())
+            .then(data => {
+                resultDiv.textContent = 'GET Success: ' + data;
+                resultDiv.className = 'result success';
+            })
+            .catch(error => {
+                resultDiv.textContent = 'GET Error: ' + error.message;
+                resultDiv.className = 'result error';
+            });
+        }
+        
+        function testPost() {
+            const email = document.getElementById('testEmail').value || 'test@example.com';
+            const resultDiv = document.getElementById('postResult');
+            resultDiv.textContent = 'Testing POST request...';
+            
+            const formData = new FormData();
+            formData.append('email', email);
+            
+            fetch(scriptUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                return response.text();
+            })
+            .then(data => {
+                resultDiv.textContent = 'POST Response: ' + data;
+                resultDiv.className = 'result success';
+            })
+            .catch(error => {
+                resultDiv.textContent = 'POST Error: ' + error.message;
+                resultDiv.className = 'result error';
+            });
+        }
+        
+        function testFormSubmission() {
+            const email = document.getElementById('testEmail').value || 'test@example.com';
+            const resultDiv = document.getElementById('formResult');
+            resultDiv.textContent = 'Testing form submission...';
+            
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = scriptUrl;
+            form.target = '_blank';
+            form.style.display = 'none';
+            
+            const emailInput = document.createElement('input');
+            emailInput.type = 'hidden';
+            emailInput.name = 'email';
+            emailInput.value = email;
+            
+            form.appendChild(emailInput);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            
+            resultDiv.textContent = 'Form submitted in new tab. Check your Google Sheet!';
+            resultDiv.className = 'result success';
+        }
+        
+        // Auto-test GET on page load
+        window.addEventListener('load', testGet);
+    </script>
+</body>
+</html>
