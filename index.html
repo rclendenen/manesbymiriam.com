@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Manes by Miriam — Book your appointment</title>
   <link rel="icon" type="image/jpeg" href="https://i.imgur.com/rOGM7hy.jpg">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
-  <!-- Custom palette: warm neutrals with soft contrast -->
+  <!-- Custom palette: warm neutrals with soft contrast - Updated v2.0 -->
   <style>
     :root{
       --bg: #E6D0CA;
@@ -246,7 +249,7 @@
         <!-- Replace with your booking URL (Square, Fresha, Acuity, Calendly, Vagaro, etc.) -->
         <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Reserve Now</a>
 
-        <hr style="margin:16px 0;border:none;border-top:1px solid #f0eaea">
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--soft-pink)">
 
         <small style="color:var(--muted)">Gift cards and extension consultations available — message below.</small>
       </aside>
@@ -306,7 +309,7 @@
       <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
-                 style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
+                 style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid var(--soft-pink);font-size:14px">
           <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
         </div>
         <small style="display:block;margin-top:8px;color:var(--muted);font-size:12px">
@@ -409,10 +412,10 @@
           <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
           <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
             <label style="display:block;margin:8px 0;font-weight:600">Email</label>
-            <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4">
+            <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--soft-pink)">
 
             <label style="display:block;margin:8px 0;font-weight:600">Message</label>
-            <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid #efe6e4"></textarea>
+            <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--soft-pink)"></textarea>
 
             <div style="margin-top:12px;display:flex;gap:8px">
               <button class="btn btn-primary" type="submit">Send</button>
@@ -491,7 +494,7 @@
         <div class="review"><strong>Anonymous</strong> — "I am completely in love with my hair & Miriam! My husband & kids went to see her and they were super happy with their outcome so I thought I'd give her a try.. I have to say, I'm SO glad I did! Let me start with, I have long hair and it's thick so I am used to paying an arm & leg.. I inquired about her prices and lucky me, she was not only having a special.. She didn't punish me for the length of my hair! But her normal prices by farrrr beat anyone I've ever been to!! I was nervous as I've gone to the same person for many years now.. But Miriam put all my nervous at easy and she went WAY BEYOND my expectations!!!! I left there happier than I've ever been with my hair! They deserve more than 5 stars. You won't regret going to see them! Another Bonus- Talented enough to cut and/ or color the whole families hair!!"</div>
         
         <!-- Additional review space for future testimonials -->
-        <div class="review" style="background:linear-gradient(180deg,#f9f9f9,#f5f5f5);border-left:4px solid var(--nude-1);color:var(--muted);font-style:italic;">
+        <div class="review" style="background:linear-gradient(180deg,var(--cream),var(--soft-pink));border-left:4px solid var(--nude-1);color:var(--muted);font-style:italic;">
           <em>Your review could be here! Share your experience with Manes by Miriam and tell us about your hair transformation story!</em>
         </div>
       </div>
@@ -615,7 +618,7 @@
       const messageDiv = document.getElementById('newsletterMessage');
       messageDiv.textContent = message;
       messageDiv.style.display = 'block';
-      messageDiv.style.color = type === 'success' ? '#4CAF50' : '#f44336';
+      messageDiv.style.color = type === 'success' ? 'var(--accent)' : 'var(--text)';
       messageDiv.style.fontWeight = '500';
     }
     
