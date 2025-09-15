@@ -191,6 +191,15 @@
     
     /* Responsive Design for Mobile */
     @media (max-width: 768px) {
+      /* Disable parallax effects on mobile to prevent overlap issues */
+      .parallax-section,
+      .parallax-slow,
+      .parallax-medium,
+      .parallax-fast {
+        transform: none !important;
+        will-change: auto !important;
+      }
+      
       /* Stack layout vertically on mobile */
       .main-layout {
         grid-template-columns: 1fr !important;
@@ -337,6 +346,35 @@
       .social-link {
         padding: 10px 14px !important;
         font-size: 14px !important;
+      }
+      
+      /* Additional mobile fixes to prevent overlap */
+      section {
+        margin: 24px 0 !important;
+        position: relative !important;
+        z-index: 1 !important;
+      }
+      
+      .card {
+        position: relative !important;
+        z-index: 1 !important;
+        margin-bottom: 20px !important;
+      }
+      
+      /* Ensure proper spacing between sections */
+      #about {
+        margin-bottom: 30px !important;
+      }
+      
+      #gallery {
+        margin-bottom: 30px !important;
+      }
+      
+      /* Fix any potential z-index issues */
+      .parallax-bg,
+      .parallax-layer-1,
+      .parallax-layer-2 {
+        z-index: -10 !important;
       }
     }
     
@@ -868,6 +906,14 @@
     
     // Enhanced Parallax with Multiple Depth Layers
     function initParallax() {
+      // Check if device is mobile
+      const isMobile = window.innerWidth <= 768;
+      
+      // If mobile, don't initialize parallax effects
+      if (isMobile) {
+        return;
+      }
+      
       const parallaxBg = document.querySelector('.parallax-bg');
       const parallaxLayer1 = document.querySelector('.parallax-layer-1');
       const parallaxLayer2 = document.querySelector('.parallax-layer-2');
