@@ -12,18 +12,18 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <!-- Neutral Feminine Color Scheme: Peach, Pink Blush, Off White, Creamy Beige, Taupe - Updated v4.0 -->
+  <!-- Custom palette: warm neutrals with soft contrast - Updated v3.0 - DEPLOYED -->
   <style>
     :root{
-      --bg: #F9F9FB;
-      --cream: #F6EADA;
-      --soft-pink: #FFDAE1;
-      --dusty-rose: #F9CABE;
-      --nude-1: #D5CCBD;
-      --accent: #F9CABE;
+      --bg: #fff8f7;
+      --cream: #fff4ef;
+      --soft-pink: #f7dfe0;
+      --dusty-rose: #e7bfc1;
+      --nude-1: #d8c7c1;
+      --accent: #cba8a8;
       --text: #2e2a28;
       --muted: #7b6f6a;
-      --pink-accent: #FFDAE1;
+      --pink-accent: #F8F0F0;
       --max-width: 1100px;
       --radius: 14px;
       --card-pad: 20px;
@@ -33,7 +33,7 @@
 
     html,body{height:100%;margin:0;background:var(--bg);color:var(--text);}
     .container{max-width:var(--max-width);margin:0 auto;padding:36px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;background:rgba(249,249,251,0.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;border-bottom:1px solid rgba(213,204,189,0.3);}
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;border-bottom:1px solid rgba(46,42,40,0.1);}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--soft-pink),var(--cream));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text);
@@ -54,7 +54,7 @@
     .btn-outline{border:2px solid var(--nude-1);background:transparent;color:var(--text)}
 
     /* Cards */
-    .card{background:var(--cream);border-radius:var(--radius);padding:var(--card-pad);box-shadow:var(--shadow)}
+    .card{background:white;border-radius:var(--radius);padding:var(--card-pad);box-shadow:var(--shadow)}
     /* Gallery */
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
     .gallery img{width:100%;height:240px;object-fit:cover;border-radius:12px;loading:lazy;max-width:100%;background:var(--cream);display:block}
@@ -64,11 +64,11 @@
     section{margin:36px 0}
     .two{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;align-content:start}
     .pricing-grid{display:flex;gap:12px;flex-wrap:wrap}
-    .price-card{flex:1 1 180px;background:linear-gradient(180deg,var(--cream),var(--bg));border-radius:12px;padding:18px}
+    .price-card{flex:1 1 180px;background:linear-gradient(180deg,var(--cream),white);border-radius:12px;padding:18px}
 
     /* Reviews */
     .reviews{display:flex;flex-direction:column;gap:12px}
-    .review{background:linear-gradient(180deg,var(--bg),var(--soft-pink));padding:14px;border-radius:12px;border-left:4px solid var(--dusty-rose)}
+    .review{background:linear-gradient(180deg,#fff,#fffaf9);padding:14px;border-radius:12px;border-left:4px solid var(--soft-pink)}
 
     /* Footer */
     footer{padding:24px 0;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
