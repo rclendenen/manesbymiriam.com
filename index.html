@@ -295,6 +295,24 @@
       </div>
     </section>
 
+    <!-- Newsletter Subscription -->
+    <section class="card" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center;margin-top:40px;margin-bottom:40px">
+      <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
+      <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
+      
+      <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
+                 style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
+          <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
+        </div>
+        <small style="display:block;margin-top:8px;color:var(--muted);font-size:12px">
+          We respect your privacy. Unsubscribe at any time.
+        </small>
+        <div id="newsletterMessage" style="margin-top:12px;font-size:14px;display:none;"></div>
+      </form>
+    </section>
+
     <!-- Main Layout: Pricing on left, Contact + Giving Back stacked on right -->
     <div class="main-layout" style="display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start">
       <!-- Pricing Section (Left Column) -->
@@ -456,7 +474,7 @@
 
 
     <!-- Reviews -->
-    <section id="reviews" class="card parallax-depth-3">
+    <section id="reviews" class="card parallax-depth-3" style="margin-top:80px">
       <h3 style="margin-top:0">What clients say</h3>
       <div class="reviews">
         <div class="review"><strong>Melanie</strong> — "Miriam did an amazing job on my hair! I love it so much the way she made the color pop and blend just how i asked and brought my confidence back! She made me feel so comfortable the entire time 10/10 would recommend"</div>
@@ -487,23 +505,6 @@
       </div>
     </section>
 
-    <!-- Newsletter Subscription -->
-    <section class="card" style="background:linear-gradient(135deg,var(--soft-pink),var(--cream));text-align:center;margin-top:80px;margin-bottom:80px;position:relative;z-index:10">
-      <h3 style="margin-top:0;color:var(--text)">Stay in the Loop</h3>
-      <p class="sub" style="color:var(--muted);margin-bottom:20px">Subscribe to our monthly newsletter for exclusive tips, seasonal specials, and behind-the-scenes content.</p>
-      
-      <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)" style="max-width:400px;margin:0 auto">
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input id="newsletterEmail" name="email" type="email" placeholder="Enter your email" required 
-                 style="flex:1;min-width:200px;padding:12px 16px;border-radius:10px;border:1px solid #efe6e4;font-size:14px">
-          <button class="btn btn-primary" type="submit" style="white-space:nowrap">Subscribe</button>
-        </div>
-        <small style="display:block;margin-top:8px;color:var(--muted);font-size:12px">
-          We respect your privacy. Unsubscribe at any time.
-        </small>
-        <div id="newsletterMessage" style="margin-top:12px;font-size:14px;display:none;"></div>
-      </form>
-    </section>
 
     <footer class="card parallax-depth-5">
       <div>&copy; <span id="year"></span> Manes by Miriam — All rights reserved</div>
