@@ -292,10 +292,20 @@
       }
       
       .mobile-book-btn .btn {
-        padding: 10px 16px !important;
-        font-size: 14px !important;
-        min-height: 40px !important;
-        white-space: nowrap !important;
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        min-height: 50px !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+      
+      /* Decrease subtitle text size on mobile to prevent overlap */
+      .brand div div:last-child {
+        font-size: 11px !important;
       }
       
       /* Better text sizing for mobile */
@@ -362,7 +372,7 @@
       
       <!-- Mobile Book Now Button -->
       <div class="mobile-book-btn">
-        <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Book Now</a>
+        <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Book<br>Now</a>
       </div>
     </header>
 
