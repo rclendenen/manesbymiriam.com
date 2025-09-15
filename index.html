@@ -415,8 +415,11 @@
           <h3 style="margin-top:0">Contact</h3>
           <p class="sub">Questions or extension consultations? Send a note and I'll get back to you within 48 hours.</p>
 
-          <!-- Replace action with your mail provider endpoint (Mailchimp, ConvertKit, etc.) -->
-          <form id="contactForm" action="{{FORM_ENDPOINT}}" method="post" onsubmit="handleSubmit(event)">
+          <!-- Contact form connected to Google Apps Script -->
+          <form id="contactForm" onsubmit="handleContactSubmit(event)">
+            <label style="display:block;margin:8px 0;font-weight:600">Name</label>
+            <input name="name" type="text" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--soft-pink)">
+
             <label style="display:block;margin:8px 0;font-weight:600">Email</label>
             <input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--soft-pink)">
 
@@ -424,8 +427,8 @@
             <textarea name="message" rows="4" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--soft-pink)"></textarea>
 
             <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn btn-primary" type="submit">Send</button>
-              <a class="btn btn-outline" href="mailto:{{YOUR_EMAIL}}">Email Directly</a>
+              <button class="btn btn-primary" type="submit" id="contactSubmitBtn">Send Message</button>
+              <a class="btn btn-outline" href="mailto:manesovermiriam@gmail.com">Email Directly</a>
             </div>
           </form>
 
@@ -548,11 +551,74 @@
     // small helpers
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    function handleSubmit(e){
+    function handleContactSubmit(e){
       e.preventDefault();
-      // Simple UX: show a thank-you and reset. Replace with fetch if you have an API endpoint.
-      alert('Thanks — your message has been sent. I will reply within 48 hours.');
-      e.target.reset();
+      
+      const submitBtn = document.getElementById('contactSubmitBtn');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      const formData = new FormData(e.target);
+      
+      // You'll need to replace this URL with your Google Apps Script deployment URL
+      const scriptUrl = 'https://script.google.com/macros/s/YOUR_CONTACT_SCRIPT_ID/exec';
+      
+      fetch(scriptUrl, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Show success message
+          showMessage('success', data.message);
+          e.target.reset();
+        } else {
+          // Show error message
+          showMessage('error', data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showMessage('error', 'Sorry, there was an error sending your message. Please try again or email directly.');
+      })
+      .finally(() => {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      });
+    }
+    
+    function showMessage(type, message) {
+      // Create message element
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        z-index: 10000;
+        max-width: 400px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        ${type === 'success' ? 'background: #4CAF50;' : 'background: #f44336;'}
+      `;
+      messageDiv.textContent = message;
+      
+      // Add to page
+      document.body.appendChild(messageDiv);
+      
+      // Remove after 5 seconds
+      setTimeout(() => {
+        if (messageDiv.parentNode) {
+          messageDiv.parentNode.removeChild(messageDiv);
+        }
+      }, 5000);
     }
 
     function handleNewsletterSubmit(e){
