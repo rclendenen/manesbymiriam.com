@@ -48,7 +48,7 @@
     /* Gallery */
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
     .gallery img{width:100%;height:240px;object-fit:contain;border-radius:12px;loading:lazy;max-width:100%;background:var(--cream);display:block}
-    .gallery img:hover{transform:scale(1.05);transition:transform 0.3s ease}
+    .gallery img:hover{transform:scale(1.2);object-fit:contain;height:auto;min-height:300px;z-index:20;position:relative;transition:all 0.3s ease;box-shadow:0 10px 30px rgba(46,42,40,0.2)}
 
     /* Sections */
     section{margin:36px 0}
