@@ -561,14 +561,27 @@
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
       
+      // Get form data
       const formData = new FormData(e.target);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const message = formData.get('message');
       
       // Google Apps Script deployment URL for contact form
       const scriptUrl = 'https://script.google.com/macros/s/AKfycby2EG7GdSdHAkP01q1E51dBvRq0lPZYVGX-XlT0uZZom5Um-qGi_zAsp08IgVyTQ1naNQ/exec';
       
+      // Send data as URL-encoded form data (Google Apps Script expects this format)
+      const params = new URLSearchParams();
+      params.append('name', name);
+      params.append('email', email);
+      params.append('message', message);
+      
       fetch(scriptUrl, {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params
       })
       .then(response => response.json())
       .then(data => {
