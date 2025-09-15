@@ -93,6 +93,27 @@
       transform:translateZ(0);
     }
     
+    /* Parallax sections */
+    .parallax-section {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    
+    .parallax-slow {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    
+    .parallax-medium {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    
+    .parallax-fast {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    
     .parallax-layer-1{
       position:fixed;
       top:-20%;
@@ -304,8 +325,8 @@
       <div class="brand">
         <img src="https://i.imgur.com/8egFySU.jpg" alt="Miriam professional headshot" style="width:56px;height:56px;border-radius:12px;object-fit:cover;box-shadow:0 2px 8px rgba(46,42,40,0.1);">
         <div>
-          <div style="font-weight:700;color:var(--text);font-family:'Quicksand', 'Raleway', sans-serif">Manes by Miriam</div>
-          <div style="font-size:12px;color:var(--muted)">Extension Expert • Full Service Stylist</div>
+          <div style="font-weight:700;color:var(--text);font-family:'Quicksand', 'Raleway', sans-serif;font-size:21px">Manes by Miriam</div>
+          <div style="font-size:17px;color:var(--muted)">Extension Expert • Full Service Stylist</div>
         </div>
       </div>
 
@@ -320,8 +341,8 @@
     </header>
 
     <!-- HERO -->
-    <main class="hero">
-      <section class="lead card" style="position:relative;z-index:1">
+    <main class="hero parallax-section">
+      <section class="lead card parallax-medium" style="position:relative;z-index:1">
         <h1>Where beauty meets confidence — your pamper day starts here.</h1>
         <p class="sub">Specializing in seamless extensions, dimensional color, and soft blonding — serving Kennedale, TX.</p>
 
@@ -338,7 +359,7 @@
       </section>
 
       <!-- quick booking card -->
-      <aside class="card" id="book" style="position:relative;z-index:1">
+      <aside class="card parallax-fast" id="book" style="position:relative;z-index:1">
         <h3 style="margin-top:0">Book an appointment</h3>
         <p class="sub">Secure your spot online — quick confirmation.</p>
         <!-- Replace with your booking URL (Square, Fresha, Acuity, Calendly, Vagaro, etc.) -->
@@ -351,7 +372,7 @@
     </main>
 
     <!-- About + Social -->
-    <section id="about" class="card" style="position:relative;z-index:1">
+    <section id="about" class="card parallax-slow" style="position:relative;z-index:1">
       <div style="display:flex;gap:18px;align-items:center">
         <img src="https://i.imgur.com/9IELCy3.jpg" alt="Miriam headshot" style="width:212px;height:212px;border-radius:12px;object-fit:cover;box-shadow:0 6px 20px rgba(46,42,40,0.06);">
         <div>
@@ -382,7 +403,7 @@
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" class="card" style="position:relative;z-index:1">
+    <section id="gallery" class="card parallax-medium" style="position:relative;z-index:1">
       <h3 style="margin-top:0">Gallery</h3>
       <div class="gallery" aria-label="Portfolio gallery">
         <img src="https://i.imgur.com/ipft6ZJ.jpg" alt="Client work - Hair styling and color">
@@ -533,7 +554,7 @@
         <!-- Community Giving -->
         <aside class="card" style="position:relative;z-index:1">
           <h3 style="margin-top:0">Giving Back</h3>
-          <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive, and through my company, I provide free haircuts for the homeless. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
+          <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive. I provide free haircuts for the homeless through haircuts for hope. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
           
           <div style="margin-top:20px">
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
@@ -817,6 +838,12 @@
       const depth4Elements = document.querySelectorAll('.parallax-depth-4');
       const depth5Elements = document.querySelectorAll('.parallax-depth-5');
       
+      // Get new parallax section elements
+      const parallaxSections = document.querySelectorAll('.parallax-section');
+      const parallaxSlow = document.querySelectorAll('.parallax-slow');
+      const parallaxMedium = document.querySelectorAll('.parallax-medium');
+      const parallaxFast = document.querySelectorAll('.parallax-fast');
+      
       function updateParallax() {
         const scrolled = window.pageYOffset;
         
@@ -860,6 +887,27 @@
         // Depth 5: Slowest movement (furthest from viewer)
         depth5Elements.forEach(element => {
           const yPos = -(scrolled * 0.05);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // New parallax section effects
+        parallaxSections.forEach(element => {
+          const yPos = -(scrolled * 0.1);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        parallaxSlow.forEach(element => {
+          const yPos = -(scrolled * 0.05);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        parallaxMedium.forEach(element => {
+          const yPos = -(scrolled * 0.15);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        parallaxFast.forEach(element => {
+          const yPos = -(scrolled * 0.25);
           element.style.transform = `translateY(${yPos}px)`;
         });
       }
