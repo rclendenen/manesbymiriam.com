@@ -569,8 +569,8 @@
       
       console.log('Form data:', { name, email, message });
       
-      // Google Apps Script deployment URL for contact form (NEW VERSION)
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycby4E5pD7KiuJuSm-7sgZCPfFQjQMMUKTW65iTV3gPhME7hqktcYzFAuDsNSekDFkIm1Fw/exec';
+      // Google Apps Script deployment URL for contact form (ULTRA SIMPLE VERSION)
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbxA4DnwiOi_VhOXJohQNmu6ckagL7k9dda-suXr4j-03IajEDBKSy0W9q170yMSlsi96g/exec';
       
       // Try multiple methods to send data
       
@@ -585,18 +585,22 @@
       
       fetch(scriptUrl, {
         method: 'POST',
-        mode: 'no-cors', // Add this to handle CORS issues
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: params
       })
-      .then(response => {
-        console.log('Response received:', response);
-        // Since we're using no-cors, we can't read the response
-        // Show success message anyway
-        showMessage('success', 'Message sent successfully! You will receive a confirmation email shortly.');
-        e.target.reset();
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response received:', data);
+        if (data.success) {
+          // Show success message
+          showMessage('success', data.message);
+          e.target.reset();
+        } else {
+          // Show error message
+          showMessage('error', data.message);
+        }
       })
       .catch(error => {
         console.error('Error:', error);
