@@ -1242,11 +1242,17 @@
       
       // Update sneak peek images
       function updateSneakPeeks() {
+        // Calculate previous and next indices with circular navigation
         const prevIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
         const nextIndex = (currentImageIndex + 1) % galleryImages.length;
         
+        // Set sneak peek images
         prevSneak.src = galleryImages[prevIndex];
         nextSneak.src = galleryImages[nextIndex];
+        
+        // Add alt text for accessibility
+        prevSneak.alt = `Previous image: ${prevIndex + 1}`;
+        nextSneak.alt = `Next image: ${nextIndex + 1}`;
         
         // Add hover effects to sneak peeks
         sneakPeekLeft.onmouseover = () => sneakPeekLeft.style.opacity = '1';
