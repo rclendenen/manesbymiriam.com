@@ -522,7 +522,7 @@
           
           <!-- Image Counter -->
           <div style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);color:white;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:600">
-            <span id="image-counter">1 / 8</span>
+            <span id="image-counter">1 / 38</span>
           </div>
           
           <!-- Navigation Arrows -->
@@ -1113,8 +1113,9 @@
     
     // Gallery Carousel Functionality
     document.addEventListener('DOMContentLoaded', function() {
-      // Gallery images array - add your 30 new photos here
+      // Gallery images array - 8 existing + 30 new photos = 38 total
       const galleryImages = [
+        // Original 8 photos
         'https://i.imgur.com/ipft6ZJ.jpg',
         'https://i.imgur.com/TkAn1cL.jpg',
         'https://i.imgur.com/Zc1fHlC.jpg',
@@ -1122,11 +1123,39 @@
         'https://i.imgur.com/y1p5DUA.jpg',
         'https://i.imgur.com/Nkgtbyg.jpg',
         'https://i.imgur.com/knoJbh9.jpg',
-        'https://i.imgur.com/hqXGLbS.jpg'
-        // TODO: Add your 30 new photo URLs here
-        // Example: 'https://i.imgur.com/your-photo1.jpg',
-        // Example: 'https://i.imgur.com/your-photo2.jpg',
-        // ... continue for all 30 photos
+        'https://i.imgur.com/hqXGLbS.jpg',
+        
+        // 30 new photos
+        'https://imgur.com/l3Mu0uU',
+        'https://imgur.com/c9e9LEz',
+        'https://imgur.com/UDgeRbj',
+        'https://imgur.com/jSilnm6',
+        'https://imgur.com/UZloYQX',
+        'https://imgur.com/kjCRgqA',
+        'https://imgur.com/Ua5Clxm',
+        'https://imgur.com/rs0q7Vt',
+        'https://imgur.com/l7kBdbe',
+        'https://imgur.com/0V4AmZu',
+        'https://imgur.com/rjAjVJ6',
+        'https://imgur.com/9Xf5I1o',
+        'https://imgur.com/HFdZADY',
+        'https://imgur.com/ZSNRysW',
+        'https://imgur.com/HdfYA0D',
+        'https://imgur.com/KsLKKTl',
+        'https://imgur.com/WPoLmVK',
+        'https://imgur.com/vgvASBa',
+        'https://imgur.com/pIO39gB',
+        'https://imgur.com/zwS1utQ',
+        'https://imgur.com/2VJP2lW',
+        'https://imgur.com/JKUrJf4',
+        'https://imgur.com/Pc07dij',
+        'https://imgur.com/p4n4yCE',
+        'https://imgur.com/H3EOZxA',
+        'https://imgur.com/el6VmnO',
+        'https://imgur.com/AqDFhyh',
+        'https://imgur.com/yLxabvg',
+        'https://imgur.com/3tcExzF',
+        'https://imgur.com/FNMiWxk'
       ];
       
       let currentImageIndex = 0;
