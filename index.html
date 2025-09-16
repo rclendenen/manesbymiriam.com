@@ -273,9 +273,20 @@
         margin: 0 !important;
       }
       
+      .gallery-main-container {
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+      
+      .sneak-peek-left,
+      .sneak-peek-right {
+        display: none !important;
+      }
+      
       .carousel-container {
         aspect-ratio: 3/4 !important;
         margin-bottom: 12px !important;
+        max-width: 100% !important;
       }
       
       .carousel-container button {
@@ -514,28 +525,43 @@
       <p class="sub" style="color:var(--muted);margin-bottom:20px">Explore our portfolio of beautiful hair transformations and styling work.</p>
       
       <!-- New Carousel Gallery -->
-      <div class="gallery-carousel" style="position:relative;max-width:800px;margin:0 auto">
-        <!-- Main Image Container -->
-        <div class="carousel-container" style="position:relative;overflow:hidden;border-radius:12px;background:var(--cream);aspect-ratio:4/3;margin-bottom:16px">
-          <img id="carousel-image" src="https://i.imgur.com/ipft6ZJ.jpg" alt="Gallery image" 
-               style="width:100%;height:100%;object-fit:cover;transition:opacity 0.3s ease">
-          
-          <!-- Image Counter -->
-          <div style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);color:white;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:600">
-            <span id="image-counter">1 / 38</span>
+      <div class="gallery-carousel" style="position:relative;max-width:900px;margin:0 auto">
+        <!-- Main Gallery Container with Sneak Peeks -->
+        <div class="gallery-main-container" style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <!-- Previous Image Sneak Peek -->
+          <div class="sneak-peek-left" style="flex:0 0 80px;height:60px;border-radius:8px;overflow:hidden;opacity:0.6;transition:opacity 0.3s ease;cursor:pointer">
+            <img id="prev-sneak" src="" alt="Previous image" style="width:100%;height:100%;object-fit:cover">
           </div>
           
-          <!-- Navigation Arrows -->
-          <button id="prev-btn" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background 0.2s ease" 
-                  onmouseover="this.style.background='rgba(0,0,0,0.8)'" 
-                  onmouseout="this.style.background='rgba(0,0,0,0.6)'">
-            ‹
-          </button>
-          <button id="next-btn" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background 0.2s ease"
-                  onmouseover="this.style.background='rgba(0,0,0,0.8)'" 
-                  onmouseout="this.style.background='rgba(0,0,0,0.6)'">
-            ›
-          </button>
+          <!-- Main Image Container -->
+          <div class="carousel-container" style="position:relative;overflow:hidden;border-radius:12px;background:var(--cream);aspect-ratio:4/3;flex:1;max-width:600px;margin:0 auto">
+            <img id="carousel-image" src="https://i.imgur.com/ipft6ZJ.jpg" alt="Gallery image" 
+                 style="width:100%;height:100%;object-fit:cover;transition:all 0.3s ease;cursor:pointer"
+                 onmouseover="this.style.objectFit='contain';this.style.transform='scale(1.05)'"
+                 onmouseout="this.style.objectFit='cover';this.style.transform='scale(1)'">
+            
+            <!-- Image Counter -->
+            <div style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);color:white;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:600;z-index:10">
+              <span id="image-counter">1 / 38</span>
+            </div>
+            
+            <!-- Navigation Arrows -->
+            <button id="prev-btn" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background 0.2s ease;z-index:10" 
+                    onmouseover="this.style.background='rgba(0,0,0,0.8)'" 
+                    onmouseout="this.style.background='rgba(0,0,0,0.6)'">
+              ‹
+            </button>
+            <button id="next-btn" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background 0.2s ease;z-index:10"
+                    onmouseover="this.style.background='rgba(0,0,0,0.8)'" 
+                    onmouseout="this.style.background='rgba(0,0,0,0.6)'">
+              ›
+            </button>
+          </div>
+          
+          <!-- Next Image Sneak Peek -->
+          <div class="sneak-peek-right" style="flex:0 0 80px;height:60px;border-radius:8px;overflow:hidden;opacity:0.6;transition:opacity 0.3s ease;cursor:pointer">
+            <img id="next-sneak" src="" alt="Next image" style="width:100%;height:100%;object-fit:cover">
+          </div>
         </div>
         
         <!-- Pagination Dots -->
@@ -1168,6 +1194,10 @@
       const prevBtn = document.getElementById('prev-btn');
       const nextBtn = document.getElementById('next-btn');
       const paginationDots = document.getElementById('pagination-dots');
+      const prevSneak = document.getElementById('prev-sneak');
+      const nextSneak = document.getElementById('next-sneak');
+      const sneakPeekLeft = document.querySelector('.sneak-peek-left');
+      const sneakPeekRight = document.querySelector('.sneak-peek-right');
       
       // Create pagination dots
       function createPaginationDots() {
@@ -1202,9 +1232,31 @@
           carouselImage.alt = `Gallery image ${currentImageIndex + 1}`;
           imageCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
           carouselImage.style.opacity = '1';
+          
+          // Update sneak peek images
+          updateSneakPeeks();
           createPaginationDots();
           isTransitioning = false;
         }, 150);
+      }
+      
+      // Update sneak peek images
+      function updateSneakPeeks() {
+        const prevIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        const nextIndex = (currentImageIndex + 1) % galleryImages.length;
+        
+        prevSneak.src = galleryImages[prevIndex];
+        nextSneak.src = galleryImages[nextIndex];
+        
+        // Add hover effects to sneak peeks
+        sneakPeekLeft.onmouseover = () => sneakPeekLeft.style.opacity = '1';
+        sneakPeekLeft.onmouseout = () => sneakPeekLeft.style.opacity = '0.6';
+        sneakPeekRight.onmouseover = () => sneakPeekRight.style.opacity = '1';
+        sneakPeekRight.onmouseout = () => sneakPeekRight.style.opacity = '0.6';
+        
+        // Add click handlers to sneak peeks
+        sneakPeekLeft.onclick = () => goToPrevious();
+        sneakPeekRight.onclick = () => goToNext();
       }
       
       // Navigate to specific image
@@ -1271,6 +1323,7 @@
       
       // Initialize
       createPaginationDots();
+      updateSneakPeeks();
       
       // Show/hide mobile instructions based on screen size
       function updateInstructions() {
