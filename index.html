@@ -498,6 +498,31 @@
       nav{display:none}
       .parallax-bg{height:100%}
     }
+    
+    /* Desktop-specific improvements */
+    @media (min-width: 769px) {
+      /* Ensure pagination dots don't overflow on desktop */
+      #pagination-dots {
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--dusty-rose) var(--soft-pink);
+      }
+      
+      /* Ensure pricing cards have consistent height */
+      .price-card {
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      /* Ensure sneak peeks are visible on desktop */
+      .sneak-peek-left,
+      .sneak-peek-right {
+        display: block !important;
+      }
+    }
   </style>
 </head>
 <body>
