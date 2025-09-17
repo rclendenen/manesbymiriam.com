@@ -333,12 +333,21 @@
       }
       
       .carousel-container button {
-        width: 44px !important;
-        height: 44px !important;
-        font-size: 18px !important;
-        min-width: 44px !important;
-        min-height: 44px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 20px !important;
+        min-width: 50px !important;
+        min-height: 50px !important;
         touch-action: manipulation !important;
+        background: rgba(0,0,0,0.7) !important;
+        border: 2px solid rgba(255,255,255,0.3) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+        transition: all 0.2s ease !important;
+      }
+      
+      .carousel-container button:active {
+        transform: translateY(-50%) scale(0.95) !important;
+        background: rgba(0,0,0,0.9) !important;
       }
       
       #image-counter {
@@ -725,7 +734,7 @@
         
           <!-- Mobile Instructions -->
           <p style="text-align:center;font-size:14px;color:var(--muted);margin:0">
-            <span style="display:none" class="mobile-only">👆 Swipe left or right to navigate through photos</span>
+            <span style="display:none" class="mobile-only">👆 Swipe left/right or tap arrow buttons to navigate</span>
             <span class="desktop-only">Use arrow keys or click navigation buttons</span>
           </p>
       </div>
@@ -1496,6 +1505,31 @@
       prevBtn.addEventListener('click', goToPrevious);
       nextBtn.addEventListener('click', goToNext);
       
+      // Add touch events to arrow buttons for better mobile experience
+      [prevBtn, nextBtn].forEach(button => {
+        if (button) {
+          button.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.style.transform = 'translateY(-50%) scale(0.95)';
+            this.style.background = 'rgba(0,0,0,0.9)';
+          }, { passive: false });
+          
+          button.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            this.style.transform = 'translateY(-50%) scale(1)';
+            this.style.background = 'rgba(0,0,0,0.7)';
+            // Trigger the click event
+            this.click();
+          }, { passive: false });
+          
+          button.addEventListener('touchcancel', function(e) {
+            e.preventDefault();
+            this.style.transform = 'translateY(-50%) scale(1)';
+            this.style.background = 'rgba(0,0,0,0.7)';
+          }, { passive: false });
+        }
+      });
+      
       // Touch events for mobile
       const carouselContainer = document.querySelector('.carousel-container');
       
@@ -1545,6 +1579,22 @@
         console.log('- Carousel image:', document.getElementById('carousel-image'));
         console.log('- Current image index:', currentImageIndex);
         console.log('- Total images:', galleryImages.length);
+        
+        // Check arrow buttons
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        console.log('- Previous button:', prevBtn);
+        console.log('- Next button:', nextBtn);
+        if (prevBtn) {
+          console.log('- Prev button display:', window.getComputedStyle(prevBtn).display);
+          console.log('- Prev button width:', window.getComputedStyle(prevBtn).width);
+          console.log('- Prev button height:', window.getComputedStyle(prevBtn).height);
+        }
+        if (nextBtn) {
+          console.log('- Next button display:', window.getComputedStyle(nextBtn).display);
+          console.log('- Next button width:', window.getComputedStyle(nextBtn).width);
+          console.log('- Next button height:', window.getComputedStyle(nextBtn).height);
+        }
         
         // Check if image is visible
         const carouselImage = document.getElementById('carousel-image');
