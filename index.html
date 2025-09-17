@@ -308,11 +308,14 @@
       .gallery-carousel {
         max-width: 100% !important;
         margin: 0 !important;
+        display: block !important;
+        visibility: visible !important;
       }
       
       .gallery-main-container {
-        flex-direction: column !important;
+        flex-direction: row !important;
         gap: 8px !important;
+        justify-content: center !important;
       }
       
       .sneak-peek-left,
@@ -321,9 +324,12 @@
       }
       
       .carousel-container {
-        aspect-ratio: 3/4 !important;
+        aspect-ratio: 4/3 !important;
         margin-bottom: 12px !important;
         max-width: 100% !important;
+        width: 100% !important;
+        min-height: 250px !important;
+        display: block !important;
       }
       
       .carousel-container button {
@@ -365,6 +371,15 @@
         touch-action: pan-y !important;
         -webkit-user-select: none !important;
         user-select: none !important;
+      }
+      
+      /* Ensure carousel image is visible on mobile */
+      #carousel-image {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        opacity: 1 !important;
       }
       
       .carousel-container:active {
@@ -1544,6 +1559,26 @@
         console.log('- Carousel image:', document.getElementById('carousel-image'));
         console.log('- Current image index:', currentImageIndex);
         console.log('- Total images:', galleryImages.length);
+        
+        // Check if image is visible
+        const carouselImage = document.getElementById('carousel-image');
+        if (carouselImage) {
+          console.log('- Image src:', carouselImage.src);
+          console.log('- Image display:', window.getComputedStyle(carouselImage).display);
+          console.log('- Image visibility:', window.getComputedStyle(carouselImage).visibility);
+          console.log('- Image opacity:', window.getComputedStyle(carouselImage).opacity);
+          console.log('- Image width:', window.getComputedStyle(carouselImage).width);
+          console.log('- Image height:', window.getComputedStyle(carouselImage).height);
+        }
+        
+        // Check container visibility
+        const container = document.querySelector('.carousel-container');
+        if (container) {
+          console.log('- Container display:', window.getComputedStyle(container).display);
+          console.log('- Container visibility:', window.getComputedStyle(container).visibility);
+          console.log('- Container width:', window.getComputedStyle(container).width);
+          console.log('- Container height:', window.getComputedStyle(container).height);
+        }
       }
       
       updateInstructions();
