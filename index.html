@@ -442,6 +442,7 @@
         position: absolute !important;
         top: 16px !important;
         right: 0 !important;
+        z-index: 1001 !important;
       }
       
       .mobile-book-btn .btn {
@@ -690,7 +691,7 @@
         <div class="gallery-main-container" style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
           <!-- Previous Image Sneak Peek -->
           <div class="sneak-peek-left" style="flex:0 0 80px;height:60px;border-radius:8px;overflow:hidden;opacity:0.6;transition:opacity 0.3s ease;cursor:pointer">
-            <img id="prev-sneak" src="" alt="Previous image" style="width:100%;height:100%;object-fit:cover">
+            <img id="prev-sneak" src="" alt="Previous image" style="width:100%;height:100%;object-fit:cover" loading="lazy">
           </div>
           
           <!-- Main Image Container -->
@@ -723,7 +724,7 @@
           
           <!-- Next Image Sneak Peek -->
           <div class="sneak-peek-right" style="flex:0 0 80px;height:60px;border-radius:8px;overflow:hidden;opacity:0.6;transition:opacity 0.3s ease;cursor:pointer">
-            <img id="next-sneak" src="" alt="Next image" style="width:100%;height:100%;object-fit:cover">
+            <img id="next-sneak" src="" alt="Next image" style="width:100%;height:100%;object-fit:cover" loading="lazy">
           </div>
         </div>
         
@@ -1013,21 +1014,14 @@
       const email = formData.get('email');
       const message = formData.get('message');
       
-      console.log('Form data:', { name, email, message });
-      
-      // Google Apps Script deployment URL for contact form (ULTRA SIMPLE VERSION)
+      // Google Apps Script deployment URL for contact form
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbxA4DnwiOi_VhOXJohQNmu6ckagL7k9dda-suXr4j-03IajEDBKSy0W9q170yMSlsi96g/exec';
       
-      // Try multiple methods to send data
-      
-      // Method 1: URL-encoded form data
+      // Send form data
       const params = new URLSearchParams();
       params.append('name', name);
       params.append('email', email);
       params.append('message', message);
-      
-      console.log('Sending to:', scriptUrl);
-      console.log('Data:', params.toString());
       
       fetch(scriptUrl, {
         method: 'POST',
@@ -1038,7 +1032,6 @@
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Response received:', data);
         if (data.success) {
           // Show success message
           showMessage('success', data.message);
@@ -1049,7 +1042,6 @@
         }
       })
       .catch(error => {
-        console.error('Error:', error);
         showMessage('error', 'Sorry, there was an error sending your message. Please try again or email directly.');
       })
       .finally(() => {
@@ -1103,25 +1095,28 @@
       // Your Google Apps Script Web App URL
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbyeL2viHptStUApNZoXbtbbebj5Gt3cXbpNt4XHoCvMUo6x2L6t6V_2IgiLTsY-19X5/exec';
       
-      // Create form data
-      const formData = new FormData();
-      formData.append('email', email);
+      // Send newsletter subscription data
+      const params = new URLSearchParams();
+      params.append('email', email);
       
-      // Try multiple methods to handle CORS issues
       fetch(scriptUrl, {
         method: 'POST',
-        mode: 'no-cors',
-        body: formData
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params
       })
-      .then(() => {
-        // With no-cors mode, we can't read the response, so assume success
-        showNewsletterMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
-        document.getElementById('newsletterEmail').value = '';
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showNewsletterMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
+          document.getElementById('newsletterEmail').value = '';
+        } else {
+          showNewsletterMessage(data.message || 'Sorry, there was an error subscribing. Please try again.', 'error');
+        }
       })
       .catch(error => {
-        console.error('Error:', error);
-        // Try alternative method using form submission
-        submitToGoogleAppsScript(email, scriptUrl);
+        showNewsletterMessage('Sorry, there was an error subscribing. Please try again.', 'error');
       })
       .finally(() => {
         // Reset button
