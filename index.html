@@ -324,11 +324,11 @@
       }
       
       .carousel-container {
-        aspect-ratio: 4/3 !important;
+        aspect-ratio: auto !important;
         margin-bottom: 12px !important;
         max-width: 100% !important;
         width: 100% !important;
-        min-height: 250px !important;
+        min-height: 300px !important;
         display: block !important;
       }
       
@@ -355,15 +355,9 @@
         touch-action: manipulation !important;
       }
       
-      /* Fix pagination dots on mobile */
+      /* Hide pagination dots on mobile */
       #pagination-dots {
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        max-width: 100% !important;
-        overflow-x: auto !important;
-        padding: 0 10px !important;
-        gap: 8px !important;
-        margin-bottom: 16px !important;
+        display: none !important;
       }
       
       /* Add visual feedback for mobile interactions */
@@ -377,9 +371,10 @@
       #carousel-image {
         display: block !important;
         width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
+        height: auto !important;
+        object-fit: contain !important;
         opacity: 1 !important;
+        max-height: 500px !important;
       }
       
       .carousel-container:active {
@@ -387,19 +382,6 @@
         transition: transform 0.1s ease !important;
       }
       
-      #pagination-dots::-webkit-scrollbar {
-        height: 4px !important;
-      }
-      
-      #pagination-dots::-webkit-scrollbar-track {
-        background: var(--soft-pink) !important;
-        border-radius: 2px !important;
-      }
-      
-      #pagination-dots::-webkit-scrollbar-thumb {
-        background: var(--dusty-rose) !important;
-        border-radius: 2px !important;
-      }
       
       /* Improve button layout on mobile */
       .btn {
@@ -743,7 +725,7 @@
         
           <!-- Mobile Instructions -->
           <p style="text-align:center;font-size:14px;color:var(--muted);margin:0">
-            <span style="display:none" class="mobile-only">👆 Swipe left or right to navigate • Tap dots below</span>
+            <span style="display:none" class="mobile-only">👆 Swipe left or right to navigate through photos</span>
             <span class="desktop-only">Use arrow keys or click navigation buttons</span>
           </p>
       </div>
@@ -1386,24 +1368,28 @@
       const sneakPeekLeft = document.querySelector('.sneak-peek-left');
       const sneakPeekRight = document.querySelector('.sneak-peek-right');
       
-      // Create pagination dots
+      // Create pagination dots (only on desktop)
       function createPaginationDots() {
         paginationDots.innerHTML = '';
-        for (let i = 0; i < galleryImages.length; i++) {
-          const dot = document.createElement('button');
-          dot.className = 'pagination-dot';
-          dot.style.cssText = `
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: ${i === currentImageIndex ? 'var(--dusty-rose)' : 'var(--nude-1)'};
-            transform: ${i === currentImageIndex ? 'scale(1.2)' : 'scale(1)'};
-          `;
-          dot.addEventListener('click', () => goToImage(i));
-          paginationDots.appendChild(dot);
+        
+        // Only show dots on desktop
+        if (window.innerWidth > 768) {
+          for (let i = 0; i < galleryImages.length; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'pagination-dot';
+            dot.style.cssText = `
+              width: 12px;
+              height: 12px;
+              border-radius: 50%;
+              border: none;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              background: ${i === currentImageIndex ? 'var(--dusty-rose)' : 'var(--nude-1)'};
+              transform: ${i === currentImageIndex ? 'scale(1.2)' : 'scale(1)'};
+            `;
+            dot.addEventListener('click', () => goToImage(i));
+            paginationDots.appendChild(dot);
+          }
         }
       }
       
@@ -1582,7 +1568,10 @@
       }
       
       updateInstructions();
-      window.addEventListener('resize', updateInstructions);
+      window.addEventListener('resize', function() {
+        updateInstructions();
+        createPaginationDots(); // Recreate dots when switching between mobile/desktop
+      });
       
       // Debug on mobile
       if (window.innerWidth <= 768) {
