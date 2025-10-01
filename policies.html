@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Policies — Manes by Miriam</title>
+  <link rel="icon" type="image/jpeg" href="https://i.imgur.com/rOGM7hy.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --bg: #fff8f7;
+      --cream: #fff4ef;
+      --soft-pink: #f7dfe0;
+      --dusty-rose: #e7bfc1;
+      --nude-1: #d8c7c1;
+      --accent: #cba8a8;
+      --text: #2e2a28;
+      --muted: #7b6f6a;
+      --max-width: 800px;
+      --radius: 14px;
+      --card-pad: 20px;
+      --shadow: 0 6px 20px rgba(46,42,40,0.06);
+      font-family: "Raleway", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:36px;
+    }
+    
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:12px 0;
+      border-bottom:1px solid rgba(46,42,40,0.1);
+      margin-bottom:36px;
+    }
+    
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    
+    h1{
+      font-size:34px;
+      margin:0 0 10px;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      font-family:"Quicksand", "Raleway", sans-serif;
+    }
+    
+    h2{
+      font-family:"Quicksand", "Raleway", sans-serif;
+      font-weight:600;
+      margin-top:32px;
+      margin-bottom:12px;
+      color:var(--accent);
+    }
+    
+    .card{
+      background:white;
+      border-radius:var(--radius);
+      padding:var(--card-pad);
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+    
+    .policy-section{
+      margin-bottom:28px;
+    }
+    
+    .policy-section ul{
+      margin:12px 0;
+      padding-left:24px;
+    }
+    
+    .policy-section li{
+      margin:8px 0;
+    }
+    
+    .policy-note{
+      background:linear-gradient(135deg,var(--soft-pink),var(--cream));
+      padding:16px;
+      border-radius:10px;
+      margin-top:16px;
+      border-left:4px solid var(--dusty-rose);
+    }
+    
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    
+    .btn-primary{
+      background:var(--dusty-rose);
+      color:white;
+    }
+    
+    .btn-outline{
+      border:2px solid var(--nude-1);
+      background:transparent;
+      color:var(--text);
+    }
+    
+    footer{
+      padding:24px 0;
+      color:var(--muted);
+      text-align:center;
+      margin-top:48px;
+    }
+    
+    @media (max-width: 768px) {
+      .container{
+        padding:20px;
+      }
+      
+      h1{
+        font-size:28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="https://i.imgur.com/8egFySU.jpg" alt="Miriam professional headshot" style="width:56px;height:56px;border-radius:12px;object-fit:cover;box-shadow:0 2px 8px rgba(46,42,40,0.1);">
+        <div>
+          <div style="font-weight:700;color:var(--text);font-family:'Quicksand', 'Raleway', sans-serif;font-size:21px">Manes by Miriam</div>
+          <div style="font-size:14px;color:var(--muted)">Salon Policies</div>
+        </div>
+      </div>
+      <a href="index.html" class="btn btn-outline" style="padding:8px 16px;font-size:14px">← Back to Home</a>
+    </header>
+
+    <main>
+      <div class="card">
+        <h1>Salon Policies</h1>
+        <p style="color:var(--muted);font-size:16px;margin-bottom:32px">
+          Thank you for choosing Manes by Miriam! Please review our policies to ensure a smooth and enjoyable experience.
+        </p>
+
+        <div class="policy-section">
+          <h2>Cancellation Policy</h2>
+          <ul>
+            <li><strong>48-hour notice required</strong> for cancellations or rescheduling.</li>
+            <li>Cancellations <strong>within 48 hours</strong> incur a <strong>50% service fee</strong>.</li>
+            <li>Cancellations <strong>within 24 hours</strong> incur a <strong>100% service fee</strong>.</li>
+          </ul>
+          <div class="policy-note">
+            <strong>💡 Please note:</strong> We understand life happens! To avoid fees, please contact us at least 48 hours before your scheduled appointment.
+          </div>
+        </div>
+
+        <div class="policy-section">
+          <h2>Service Adjustments</h2>
+          <p>
+            You have a <strong>7-day window</strong> following your appointment to request any adjustments to your color or cut at <strong>no additional cost</strong>.
+          </p>
+          <div class="policy-note">
+            <strong>✨ Your satisfaction matters:</strong> If you're not completely happy with your service, please reach out within 7 days and we'll make it right!
+          </div>
+        </div>
+
+        <div class="policy-section">
+          <h2>Refund Policy</h2>
+          <p>
+            There are <strong>no refunds available</strong> for any services rendered. However, all services can be <strong>revised within a seven-day period</strong> following your appointment.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2>Guest Policy</h2>
+          <p>
+            Guests are welcome to join but must <strong>wait in the waiting room</strong> during services. For safety and sanitation, <strong>only one person is allowed in the suite at a time</strong>.
+          </p>
+          <div class="policy-note">
+            <strong>🙏 Thank you for understanding:</strong> This policy helps us maintain a safe, clean, and focused environment for your service.
+          </div>
+        </div>
+
+        <div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--nude-1);text-align:center">
+          <p style="color:var(--muted);margin-bottom:20px">
+            Questions about our policies? We're here to help!
+          </p>
+          <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+          <a href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" class="btn btn-outline">Book Now</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div>&copy; <span id="year"></span> Manes by Miriam — All rights reserved</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
