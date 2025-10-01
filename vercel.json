@@ -3,11 +3,19 @@
   "name": "manesbymiriam",
   "builds": [
     {
-      "src": "index.html",
+      "src": "*.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/policies.html",
+      "dest": "/policies.html"
+    },
+    {
+      "src": "/policies",
+      "dest": "/policies.html"
+    },
     {
       "src": "/(.*)",
       "dest": "/index.html"
