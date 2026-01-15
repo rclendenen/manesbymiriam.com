@@ -51,8 +51,8 @@
       font-family: "Raleway", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);}
-    .container{max-width:var(--max-width);margin:0 auto;padding:36px;}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);overflow-x:hidden;}
+    .container{max-width:var(--max-width);margin:0 auto;padding:36px;width:100%;box-sizing:border-box;}
     header{display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;border-bottom:1px solid rgba(46,42,40,0.1);}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
@@ -555,19 +555,148 @@
         text-align: center !important;
         gap: 12px !important;
       }
+      
+      /* Prevent horizontal overflow on mobile */
+      * {
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+      }
     }
     
-    /* Responsive */
+    /* Responsive - Tablet and smaller desktop */
     @media (max-width:920px){ 
       .hero,.two{grid-template-columns:1fr} 
       .gallery{grid-template-columns:repeat(2,1fr)} 
       .gallery img{height:160px} 
       nav{display:none}
       .parallax-bg{height:100%}
+      
+      /* Prevent overflow */
+      body {
+        overflow-x: hidden;
+      }
+      
+      .container {
+        padding: 24px !important;
+      }
     }
     
-    /* Desktop-specific improvements */
-    @media (min-width: 769px) {
+    /* iPad-specific optimizations (768px - 1024px) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      /* Optimize container padding for iPad */
+      .container {
+        padding: 28px !important;
+      }
+      
+      /* Adjust hero section for iPad */
+      .hero {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      
+      /* Optimize main layout for iPad - stack on smaller iPads */
+      .main-layout {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+      
+      /* Ensure pricing grid works well on iPad */
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+      }
+      
+      /* Optimize gallery carousel for iPad */
+      .gallery-main-container {
+        gap: 16px !important;
+      }
+      
+      .carousel-container {
+        max-width: 100% !important;
+      }
+      
+      /* Show sneak peeks on iPad but make them slightly smaller */
+      .sneak-peek-left,
+      .sneak-peek-right {
+        flex: 0 0 70px !important;
+        height: 50px !important;
+        display: block !important;
+      }
+      
+      /* Ensure touch targets are appropriate for iPad */
+      .btn {
+        min-height: 44px !important;
+        padding: 12px 18px !important;
+        font-size: 15px !important;
+      }
+      
+      .carousel-container button {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+      }
+      
+      /* Optimize text sizes for iPad */
+      h1 {
+        font-size: 32px !important;
+      }
+      
+      h2 {
+        font-size: 26px !important;
+      }
+      
+      h3 {
+        font-size: 22px !important;
+      }
+      
+      /* Ensure pagination dots are visible but not too many */
+      #pagination-dots {
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--dusty-rose) var(--soft-pink);
+        padding: 0 20px;
+      }
+      
+      .pagination-dot {
+        width: 10px !important;
+        height: 10px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+      }
+      
+      /* Optimize about section for iPad */
+      #about > div {
+        flex-direction: row !important;
+        gap: 24px !important;
+      }
+      
+      #about img {
+        width: 180px !important;
+        height: 180px !important;
+        flex-shrink: 0 !important;
+      }
+      
+      /* Ensure cards have proper spacing */
+      .card {
+        margin-bottom: 24px !important;
+      }
+    }
+    
+    /* Desktop-specific improvements (1025px and above) */
+    @media (min-width: 1025px) {
+      /* Constrain max width on very large screens (MacBook, large monitors) */
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+      
       /* Ensure pagination dots don't overflow on desktop */
       #pagination-dots {
         max-width: 100%;
@@ -588,6 +717,21 @@
       .sneak-peek-left,
       .sneak-peek-right {
         display: block !important;
+      }
+      
+      /* Optimize gallery for large screens */
+      .gallery-carousel {
+        max-width: 900px;
+      }
+      
+      /* Ensure proper spacing on large screens */
+      section {
+        margin: 48px 0;
+      }
+      
+      /* Optimize hero section for large screens */
+      .hero {
+        margin: 48px 0;
       }
     }
   </style>
@@ -796,7 +940,7 @@
               <strong>Balayage Touch Up</strong><div style="margin-top:8px;color:var(--muted)">$215</div>
             </div>
             <div class="price-card">
-              <strong>Full Highlight</strong><div style="margin-top:8px;color:var(--muted)">$230</div>
+              <strong>Full Highlight</strong><div style="margin-top:8px;color:var(--muted)">$230+</div>
             </div>
             <div class="price-card">
               <strong>Mid Highlight</strong><div style="margin-top:8px;color:var(--muted)">$185</div>
@@ -805,7 +949,7 @@
               <strong>Partial Highlight</strong><div style="margin-top:8px;color:var(--muted)">$145</div>
             </div>
             <div class="price-card">
-              <strong>Full Blonding</strong><div style="margin-top:8px;color:var(--muted)">$300</div>
+              <strong>Full Blonding</strong><div style="margin-top:8px;color:var(--muted)">$300+</div>
             </div>
           </div>
         </div>
@@ -829,7 +973,7 @@
           <h4 style="margin:0 0 12px;color:var(--text);font-size:18px">Color & Styling</h4>
           <div class="pricing-grid">
             <div class="price-card">
-              <strong>All Over</strong><div style="margin-top:8px;color:var(--muted)">$175</div>
+              <strong>All Over</strong><div style="margin-top:8px;color:var(--muted)">$175+</div>
             </div>
             <div class="price-card">
               <strong>Color Retouch</strong><div style="margin-top:8px;color:var(--muted)">$145</div>
