@@ -83,8 +83,8 @@
     /* Sections */
     section{margin:36px 0}
     .two{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;align-content:start}
-    .pricing-grid{display:flex;gap:12px;flex-wrap:wrap}
-    .price-card{flex:1 1 180px;background:linear-gradient(180deg,var(--cream),white);border-radius:12px;padding:18px}
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+    .price-card{background:linear-gradient(180deg,var(--cream),white);border-radius:12px;padding:18px}
 
     /* Reviews */
     .reviews{display:flex;flex-direction:column;gap:12px}
@@ -99,9 +99,57 @@
     .social-link:hover{background:var(--accent);color:white}
     .social-icon{width:18px;height:18px;fill:currentColor}
     
-    /* Mobile Book Now Button */
-    .mobile-book-btn {
+    /* Mobile Book Now Button & Menu */
+    .mobile-book-btn,
+    .mobile-menu-btn {
       display: none;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid rgba(46,42,40,0.1);
+      box-shadow: var(--shadow);
+      padding: 12px 20px 16px;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1002;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .mobile-nav a:hover,
+    .mobile-nav a:focus {
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    .mobile-menu-btn {
+      background: transparent;
+      border: 2px solid var(--nude-1);
+      border-radius: 10px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 8px 12px;
+      touch-action: manipulation;
     }
     
     /* Skip link styles */
@@ -434,6 +482,7 @@
       .brand {
         flex: 1 !important;
         min-width: 200px !important;
+        padding-right: 120px !important;
       }
       
       /* Show mobile book button on mobile */
@@ -442,6 +491,14 @@
         position: absolute !important;
         top: 16px !important;
         right: 0 !important;
+        z-index: 1001 !important;
+      }
+
+      .mobile-menu-btn {
+        display: block !important;
+        position: absolute !important;
+        top: 16px !important;
+        right: 72px !important;
         z-index: 1001 !important;
       }
       
@@ -557,12 +614,13 @@
       }
       
       /* Prevent horizontal overflow on mobile */
-      * {
-        max-width: 100%;
-        box-sizing: border-box;
+      body {
+        overflow-x: hidden;
       }
-      
-      img {
+
+      img,
+      video,
+      iframe {
         max-width: 100%;
         height: auto;
       }
@@ -573,7 +631,36 @@
       .hero,.two{grid-template-columns:1fr} 
       .gallery{grid-template-columns:repeat(2,1fr)} 
       .gallery img{height:160px} 
-      nav{display:none}
+      nav[aria-label="Primary"]{display:none}
+      .mobile-book-btn,
+      .mobile-menu-btn{display:block}
+      header{position:relative}
+      .mobile-book-btn{
+        position:absolute;
+        top:12px;
+        right:0;
+        z-index:1001;
+      }
+      .mobile-menu-btn{
+        position:absolute;
+        top:12px;
+        right:76px;
+        z-index:1001;
+      }
+      .mobile-book-btn .btn{
+        padding:8px 12px;
+        font-size:12px;
+        min-height:44px;
+        line-height:1.2;
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+      }
+      .brand{
+        padding-right:120px;
+      }
       .parallax-bg{height:100%}
       
       /* Prevent overflow */
@@ -761,12 +848,21 @@
         <a href="#pricing">Pricing</a>
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
-        <a class="cta" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Book Now</a>
+        <a class="cta" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </nav>
+
+      <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
+      <nav id="mobileNav" class="mobile-nav" aria-label="Mobile">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
       </nav>
       
       <!-- Mobile Book Now Button -->
       <div class="mobile-book-btn">
-        <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Book<br>Now</a>
+        <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" rel="noopener noreferrer">Book<br>Now</a>
       </div>
     </header>
 
@@ -776,7 +872,7 @@
         <h1>Where beauty meets confidence — Your pamper day starts here.</h1>
         <p class="sub">Specializing in seamless extensions, dimensional color, and soft blonding — serving Pantego, TX. Located inside Morada Senior Living.</p>
 
-        <p><a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Book Now</a>
+        <p><a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" rel="noopener noreferrer">Book Now</a>
            <a class="btn btn-outline" href="#contact">Inquiries</a></p>
 
         <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
@@ -784,7 +880,7 @@
           <div style="color:var(--muted)">Sun–Wed • 9:30 AM–4 PM</div>
         </div>
         <div style="margin-top:18px;font-size:14px;color:var(--muted)">Follow on:
-          <a href="https://www.instagram.com/Manesbymiriam/?fbclid=IwY2xjawMwiAtleHRuA2FlbQIxMABicmlkETE5RVF2bjlybmZOVm5qcjZLAR6g9MxJ7r_88JczDtL5wWxiJ7ZjlN_GxHzg-rlr5jSxpv4yOMf96aNWuyZXWQ_aem_9TJJKZpnO6F5dVKiRs2IYQ#" style="margin-left:8px;text-decoration:none;color:var(--dusty-rose)">@manesbymiriam</a>
+          <a href="https://www.instagram.com/manesbymiriam/" style="margin-left:8px;text-decoration:none;color:var(--dusty-rose)">@manesbymiriam</a>
         </div>
       </section>
 
@@ -793,7 +889,7 @@
         <h3 style="margin-top:0">Book an appointment</h3>
         <p class="sub">Secure your spot online — quick confirmation.</p>
         <!-- Replace with your booking URL (Square, Fresha, Acuity, Calendly, Vagaro, etc.) -->
-        <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank">Reserve Now</a>
+        <a class="btn btn-primary" href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" rel="noopener noreferrer">Reserve Now</a>
 
         <hr style="margin:16px 0;border:none;border-top:1px solid var(--soft-pink)">
 
@@ -809,13 +905,13 @@
           <h2 style="margin:0 0 6px">Hi — I'm Miriam</h2>
           <p class="sub">A licensed hairstylist and certified extension specialist with 6 years behind the chair. I absolutely adore what I do. To me, hair isn't just about a color or a cut — it's about connection. From the first consult to the final style, I cherish every moment spent with my clients. It's in those conversations, laughs, and relationships that the magic really happens.<br><br>Hair has the power to transform more than just how we look — it transforms how we feel. That's why I pour my heart into every appointment. My chair is a space of trust, beauty, and self-love.<br><br>Giving back is a huge part of my mission. Every year, I offer free haircuts for families during the holidays, and I'm working toward expanding that outreach - especially for kids in the foster care system. Every child deserves to feel special, valued, and confident. My dream is to open a salon that's more than just a salon — a community space where beauty meets purpose, and everyone leaves feeling seen, celebrated, and cared for.<br><br>Let's change the world, one haircut at a time.</p>
           <div class="social-links" style="margin-top:8px">
-            <a href="https://www.instagram.com/Manesbymiriam/?fbclid=IwY2xjawMwiAtleHRuA2FlbQIxMABicmlkETE5RVF2bjlybmZOVm5qcjZLAR6g9MxJ7r_88JczDtL5wWxiJ7ZjlN_GxHzg-rlr5jSxpv4yOMf96aNWuyZXWQ_aem_9TJJKZpnO6F5dVKiRs2IYQ#" class="social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/manesbymiriam/" class="social-link" aria-label="Instagram">
               <svg class="social-icon" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
               </svg>
               Instagram
             </a>
-            <a href="https://www.tiktok.com/@manesbymiriam?_t=ZP-8zenEShqHPz&_r=1" class="social-link" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@manesbymiriam" class="social-link" aria-label="TikTok">
               <svg class="social-icon" viewBox="0 0 24 24">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
               </svg>
@@ -1038,7 +1134,7 @@
           <div style="margin-top:18px;font-size:13px;color:var(--muted)">
             <strong>Location:</strong> 2650 W Park Row Dr, Pantego, TX 76013<br>
             <span style="display:block;margin-top:4px">Located inside Morada Senior Living, United States</span>
-            <a href="https://www.google.com/maps/place/2650+W+Park+Row+Dr,+Pantego,+TX+76013" target="_blank" style="color:var(--dusty-rose);text-decoration:none;display:inline-block;margin-top:4px">Get directions</a>
+            <a href="https://www.google.com/maps/place/2650+W+Park+Row+Dr,+Pantego,+TX+76013" target="_blank" rel="noopener noreferrer" style="color:var(--dusty-rose);text-decoration:none;display:inline-block;margin-top:4px">Get directions</a>
           </div>
           <div style="margin-top:8px;font-size:13px;color:var(--muted)">
             <strong>Hours:</strong> Sunday–Wednesday • 9:30 AM–4 PM
@@ -1054,7 +1150,7 @@
         <!-- Community Giving -->
         <aside class="card" style="position:relative;z-index:1">
           <h3 style="margin-top:0">Giving Back</h3>
-          <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive. I provide free haircuts for the homeless through <a href="https://cloudcoveredstreets.org/" target="_blank" style="color: var(--accent); text-decoration: underline;">Cloud Covered Streets</a>. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
+          <p class="sub">Giving back has always been at the heart of what I do. I'm passionate about helping others and creating opportunities to serve the community. Each year, I host an annual haircut drive. I provide free haircuts for the homeless through <a href="https://cloudcoveredstreets.org/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">Cloud Covered Streets</a>. It's my way of using my skills to bring dignity, confidence, and care to those who need it most.</p>
           
           <div style="margin-top:20px">
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
@@ -1083,7 +1179,7 @@
               </div>
               <div>
                 <h4 style="margin:0 0 4px;color:var(--text);font-size:16px">Haircuts for the Homeless</h4>
-                <p style="margin:0;color:var(--muted);font-size:14px">Providing dignity and care through <a href="https://cloudcoveredstreets.org/" target="_blank" style="color:var(--dusty-rose);text-decoration:none;font-weight:600">Cloud Covered Streets</a></p>
+                <p style="margin:0;color:var(--muted);font-size:14px">Providing dignity and care through <a href="https://cloudcoveredstreets.org/" target="_blank" rel="noopener noreferrer" style="color:var(--dusty-rose);text-decoration:none;font-weight:600">Cloud Covered Streets</a></p>
               </div>
             </div>
           </div>
@@ -1120,7 +1216,7 @@
       
       <!-- Leave a Review Button -->
       <div style="text-align:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--nude-1)">
-        <a href="https://www.google.com/search?sca_esv=d6124646a290b296&sxsrf=AE3TifNcorRCIrzbyRP0GRXOkIzeGIppgw:1757900408943&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E9cPFpA-2nqsgMvZLrUbQn1jb_XGosyYaQOQtQsKdFSTltuy2nXyargaPJp4xbkI5Deg-VgOeeNTjz5O3yT04ANzVCAj&q=B%26B+Studio+Reviews&sa=X&ved=2ahUKEwifx7Or0dmPAxUG78kDHYYuFGcQ0bkNegQIMxAE&biw=1528&bih=708&dpr=1.25" target="_blank" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:8px">
+        <a href="https://www.google.com/search?q=Manes+by+Miriam+reviews" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:8px">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
           </svg>
@@ -1134,7 +1230,7 @@
     <footer class="card" style="position:relative;z-index:10;clear:both">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
         <div>&copy; <span id="year"></span> Manes by Miriam — All rights reserved</div>
-        <a href="policies.html" style="color:var(--muted);text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;position:relative;z-index:10;transition:color 0.2s ease;border:none;background:none;padding:0;border-radius:0" target="_blank" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
+        <a href="policies.html" style="color:var(--muted);text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;position:relative;z-index:10;transition:color 0.2s ease;border:none;background:none;padding:0;border-radius:0" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
@@ -1146,13 +1242,13 @@
         </a>
       </div>
       <div class="social-links" style="margin-top:16px">
-        <a href="https://www.instagram.com/Manesbymiriam/?fbclid=IwY2xjawMwiAtleHRuA2FlbQIxMABicmlkETE5RVF2bjlybmZOVm5qcjZLAR6g9MxJ7r_88JczDtL5wWxiJ7ZjlN_GxHzg-rlr5jSxpv4yOMf96aNWuyZXWQ_aem_9TJJKZpnO6F5dVKiRs2IYQ#" class="social-link" aria-label="Instagram">
+        <a href="https://www.instagram.com/manesbymiriam/" class="social-link" aria-label="Instagram">
           <svg class="social-icon" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
           Instagram
         </a>
-        <a href="https://www.tiktok.com/@manesbymiriam?_t=ZP-8zenEShqHPz&_r=1" class="social-link" aria-label="TikTok">
+        <a href="https://www.tiktok.com/@manesbymiriam" class="social-link" aria-label="TikTok">
           <svg class="social-icon" viewBox="0 0 24 24">
             <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
           </svg>
@@ -1172,6 +1268,37 @@
   <script>
     // small helpers
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile navigation menu
+    (function initMobileMenu() {
+      const menuBtn = document.getElementById('mobileMenuBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      if (!menuBtn || !mobileNav) return;
+
+      function closeMenu() {
+        mobileNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'Open menu');
+        menuBtn.textContent = '☰';
+      }
+
+      menuBtn.addEventListener('click', function() {
+        const isOpen = mobileNav.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        menuBtn.textContent = isOpen ? '✕' : '☰';
+      });
+
+      mobileNav.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('click', function(event) {
+        if (!mobileNav.contains(event.target) && !menuBtn.contains(event.target)) {
+          closeMenu();
+        }
+      });
+    })();
 
     function handleContactSubmit(e){
       e.preventDefault();
@@ -1739,64 +1866,11 @@
         }
       }
       
-      // Debug function for mobile testing
-      function debugMobileGallery() {
-        console.log('Mobile Gallery Debug:');
-        console.log('- Screen width:', window.innerWidth);
-        console.log('- Is mobile:', window.innerWidth <= 768);
-        console.log('- Touch events supported:', 'ontouchstart' in window);
-        console.log('- Carousel container:', document.querySelector('.carousel-container'));
-        console.log('- Carousel image:', document.getElementById('carousel-image'));
-        console.log('- Current image index:', currentImageIndex);
-        console.log('- Total images:', galleryImages.length);
-        
-        // Check arrow buttons
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        console.log('- Previous button:', prevBtn);
-        console.log('- Next button:', nextBtn);
-        if (prevBtn) {
-          console.log('- Prev button display:', window.getComputedStyle(prevBtn).display);
-          console.log('- Prev button width:', window.getComputedStyle(prevBtn).width);
-          console.log('- Prev button height:', window.getComputedStyle(prevBtn).height);
-        }
-        if (nextBtn) {
-          console.log('- Next button display:', window.getComputedStyle(nextBtn).display);
-          console.log('- Next button width:', window.getComputedStyle(nextBtn).width);
-          console.log('- Next button height:', window.getComputedStyle(nextBtn).height);
-        }
-        
-        // Check if image is visible
-        const carouselImage = document.getElementById('carousel-image');
-        if (carouselImage) {
-          console.log('- Image src:', carouselImage.src);
-          console.log('- Image display:', window.getComputedStyle(carouselImage).display);
-          console.log('- Image visibility:', window.getComputedStyle(carouselImage).visibility);
-          console.log('- Image opacity:', window.getComputedStyle(carouselImage).opacity);
-          console.log('- Image width:', window.getComputedStyle(carouselImage).width);
-          console.log('- Image height:', window.getComputedStyle(carouselImage).height);
-        }
-        
-        // Check container visibility
-        const container = document.querySelector('.carousel-container');
-        if (container) {
-          console.log('- Container display:', window.getComputedStyle(container).display);
-          console.log('- Container visibility:', window.getComputedStyle(container).visibility);
-          console.log('- Container width:', window.getComputedStyle(container).width);
-          console.log('- Container height:', window.getComputedStyle(container).height);
-        }
-      }
-      
       updateInstructions();
       window.addEventListener('resize', function() {
         updateInstructions();
-        createPaginationDots(); // Recreate dots when switching between mobile/desktop
+        createPaginationDots();
       });
-      
-      // Debug on mobile
-      if (window.innerWidth <= 768) {
-        setTimeout(debugMobileGallery, 1000);
-      }
     });
   </script>
 </body>

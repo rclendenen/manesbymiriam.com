@@ -48,6 +48,7 @@
       padding:12px 0;
       border-bottom:1px solid rgba(46,42,40,0.1);
       margin-bottom:36px;
+      flex-wrap:wrap;
     }
     
     .brand{
@@ -135,6 +136,14 @@
       h1{
         font-size:28px;
       }
+
+      header{
+        gap:12px;
+      }
+
+      .btn{
+        min-height:44px;
+      }
     }
   </style>
 </head>
@@ -148,7 +157,7 @@
           <div style="font-size:14px;color:var(--muted)">Salon Policies</div>
         </div>
       </div>
-      <a href="index.html" class="btn btn-outline" style="padding:8px 16px;font-size:14px">← Back to Home</a>
+      <a href="/" class="btn btn-outline" style="padding:8px 16px;font-size:14px;white-space:nowrap">← Back to Home</a>
     </header>
 
     <main>
@@ -201,8 +210,8 @@
           <p style="color:var(--muted);margin-bottom:20px">
             Questions about our policies? We're here to help!
           </p>
-          <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
-          <a href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" class="btn btn-outline">Book Now</a>
+          <a href="/#contact" class="btn btn-primary">Contact Us</a>
+          <a href="https://book.squareup.com/appointments/ewpdv30oqob11e/location/LPQEJSXJCMRHP/services?buttonTextColor=ffffff&color=000000&locale=en&referrer=so" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Book Now</a>
         </div>
       </div>
     </main>
